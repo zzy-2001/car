@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.CarDao">
+
+    <!-- 树 -->
+    <select id="findnode" resultType="com.jk.pojo.TreeBean">
+		select tr.id,tr.text,tr.url,tr.qx from
+		t_tree tr left join t_role_power rp on rp.powerid = tr.id
+		left join t_user_role ur on ur.roleid = rp.roleid
+		where ur.userid = #{userid} and tr.pid = #{pid} and tr.location != 'button' GROUP BY tr.id
+	</select>
+
+</mapper>

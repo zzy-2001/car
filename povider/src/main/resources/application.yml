@@ -4,11 +4,28 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/20067
+    url: jdbc:mysql://localhost:3306/four
     username: root
     password: zzy12345
   application:
     name: provider
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      post: 6379
+      password:
+    mongodb:
+      uri: mongodb://localhost:27017/zzy
+    #配置elasticSearch信息
+    elasticsearch:
+      #连接的集群名称
+      cluster-name: elasticsearch
+      #连接的集群节点
+      cluster-nodes: localhost:9300
+      #是否开启本地储存
+      repositories:
+        enabled: true
 eureka:
   client:
     #eureka服务地址
