@@ -25,4 +25,10 @@ public interface CarService {
     CarBean findById(@RequestParam("id")Integer id);
     @RequestMapping("car/voipCar")
     void voipCar(@RequestParam("id") Integer id, @RequestParam("field") String field,@RequestParam("biz") Integer biz);
+    @RequestMapping("car/addCol")
+    void addCol(CarBean bean);
+    @RequestMapping("car/delCol")
+    void delCol(@RequestParam("id")Integer id);
+    @RequestMapping("car/findByIdCol")
+    CarBean findByIdCol(@RequestParam("id")Integer id);
 }

@@ -97,6 +97,27 @@ public class CarServiceImpl implements Carservice {
         }
     }
 
+    @Override
+    public void addCol(CarBean bean) {
+        if (bean.getId()==null){
+            //颜色新增
+            dao.addCol(bean);
+        }else {
+            //颜色修改
+            dao.upCol(bean);
+        }
+    }
+
+    @Override
+    public void delCol(Integer id) {
+        dao.delCol(id);
+    }
+
+    @Override
+    public CarBean findByIdCol(Integer id) {
+        return dao.findByIdCol(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

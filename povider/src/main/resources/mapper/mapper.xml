@@ -72,6 +72,22 @@
 	</update>
 	<!--删除-->
 	<delete id="delCar">
-		delete from t_t_car where id = #{id}
+		delete from t_car where id = #{id}
 	</delete>
+	<!--颜色新增-->
+	<insert id="addCol">
+		insert into t_color values(id,#{name},#{color})
+	</insert>
+	<!--颜色修改-->
+	<update id="upCol">
+		update t_color set name = #{name},color = #{color} where id = #{id}
+	</update>
+	<!--颜色删除-->
+	<delete id="delCol">
+		delete from t_color where id = #{id}
+	</delete>
+	<!--颜色回显-->
+	<select id="findByIdCol" resultType="com.jk.pojo.CarBean">
+		select * from t_color where id = #{id}
+	</select>
 </mapper>

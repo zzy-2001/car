@@ -67,7 +67,7 @@ public class CarController {
     }
     @RequestMapping("toaddCol")
     public String toaddCol(){
-        return "car/toaddCol";
+        return "car/addCol";
     }
 
     /**
@@ -97,7 +97,7 @@ public class CarController {
 
     /**
      * @Author: zzy
-     * @Description: 新增车型
+     * @Description: 新增 修改  车型
      * @Date: 2021/1/13 14:39
      * @Return: void
      **/
@@ -117,8 +117,6 @@ public class CarController {
     public CarBean findById(Integer id){
         return service.findById(id);
     }
-
-
     /**
      * @Author: zzy
      * @Description: 业务  禁用 |取消最热 |取消首发 | 删除
@@ -129,6 +127,42 @@ public class CarController {
     @ResponseBody
     public void voipCar(Integer id,String field,Integer biz){
         service.voipCar(id,field,biz);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 新增 修改 颜色表
+     * @Date: 2021/1/13 16:40
+     * @Return: void
+     **/
+    @RequestMapping("addCol")
+    @ResponseBody
+    public void addCol(CarBean bean){
+        service.addCol(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除颜色
+     * @Date: 2021/1/13 16:46
+     * @Return: void
+     **/
+    @RequestMapping("delCol")
+    @ResponseBody
+    public void delCol(Integer id){
+        service.delCol(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description:
+     * @Date: 2021/1/13 16:49
+     * @Return: com.jk.pojo.CarBean
+     **/
+    @RequestMapping("findByIdCol")
+    @ResponseBody
+    public CarBean findByIdCol(Integer id){
+        return service.findByIdCol(id);
     }
 
 }

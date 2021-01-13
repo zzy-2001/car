@@ -20,4 +20,10 @@ public interface Carservice {
     CarBean findById(Integer id);
 
     void voipCar(Integer id, String field, Integer biz);
+
+    void addCol(CarBean bean);
+
+    void delCol(Integer id);
+
+    CarBean findByIdCol(Integer id);
 }

@@ -34,4 +34,12 @@ public interface CarDao {
     void staCar(@Param("id")Integer id,@Param("biz") Integer biz);
 
     void delCar(Integer id);
+
+    void addCol(CarBean bean);
+
+    void upCol(CarBean bean);
+
+    void delCol(Integer id);
+
+    CarBean findByIdCol(Integer id);
 }

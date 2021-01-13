@@ -106,4 +106,40 @@ public class CarController {
     public void voipCar(Integer id,String field,Integer biz){
         service.voipCar(id,field,biz);
     }
+
+    /**
+     * @Author: zzy
+     * @Description: 新增 修改 颜色表
+     * @Date: 2021/1/13 16:40
+     * @Return: void
+     **/
+    @RequestMapping("addCol")
+    @ResponseBody
+    public void addCol(@RequestBody CarBean bean){
+        service.addCol(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除颜色
+     * @Date: 2021/1/13 16:46
+     * @Return: void
+     **/
+    @RequestMapping("delCol")
+    @ResponseBody
+    public void delCol(Integer id){
+        service.delCol(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description:
+     * @Date: 2021/1/13 16:49
+     * @Return: com.jk.pojo.CarBean
+     **/
+    @RequestMapping("findByIdCol")
+    @ResponseBody
+    public CarBean findByIdCol(Integer id){
+        return service.findByIdCol(id);
+    }
 }
