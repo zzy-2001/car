@@ -38,6 +38,11 @@ public class CarController {
         return "car/show";
     }
 
+    @RequestMapping("color")
+    public String color(){
+        return "car/color";
+    }
+
 
     /*
      * @Author: zzy
@@ -52,13 +57,17 @@ public class CarController {
     }
     /**
      * @Author: zzy
-     * @Description: 跳转页面
+     * @Description: 跳转新增页面
      * @Date: 2021/1/13 14:37
      * @Return: java.lang.String
      **/
     @RequestMapping("toadd")
     public String toadd(){
         return "car/add";
+    }
+    @RequestMapping("toaddCol")
+    public String toaddCol(){
+        return "car/toaddCol";
     }
 
     /**
@@ -97,7 +106,6 @@ public class CarController {
     public void addCar(CarBean bean){
         service.addCar(bean);
     }
-
     /**
      * @Author: zzy
      * @Description: 车型回显
@@ -110,5 +118,17 @@ public class CarController {
         return service.findById(id);
     }
 
+
+    /**
+     * @Author: zzy
+     * @Description: 业务  禁用 |取消最热 |取消首发 | 删除
+     * @Date: 2021/1/13 15:38
+     * @Return: void
+     **/
+    @RequestMapping("voipCar")
+    @ResponseBody
+    public void voipCar(Integer id,String field,Integer biz){
+        service.voipCar(id,field,biz);
+    }
 
 }

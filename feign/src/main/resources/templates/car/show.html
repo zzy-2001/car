@@ -174,16 +174,16 @@
     function sou(){
         $('#mytable').bootstrapTable("refresh")
     }
-    function del(id){
+    function del(id,field,biz){
         $.ajax({
-            url:"../car/delEmp",
-            data:{arr:id},
+            url:"../car/voipCar",
+            data:{id:id,field:field,biz:biz},
             success:function(){
                 sou()
                 bootbox.alert({
                     size: "small",
                     title: "提示",
-                    message: "删除成功！！！",
+                    message: "操作成功！！！",
                     callback: function(){}
                 });
             }
@@ -221,25 +221,25 @@
                         {field:"status",title:"状态",formatter:function (value,row,index){
                             return value==1?"启用":"禁用";
                         }},
-                        {field: "qq",title: "操作",formatter:function (value,row,index){
+                        {field: "qq",title: "操作",formatter:function (value,rows,index){
                             var s=""
-                            s+="<a href='javascript:update("+row.id+")'>编辑</a> |"
-                            if (row.status=1){
-                                s+="<a href='javascript:update("+row.id+")'>禁用</a> |"
+                            s+="<a href='javascript:update("+rows.id+")'>编辑</a> |"
+                            if (rows.status==1){
+                                s+="<a href='javascript:del("+rows.id+",1,2)'>禁用</a> |"
                             }else {
-                                s+="<a href='javascript:update("+row.id+")'>启用</a> |"
+                                s+="<a href='javascript:del("+rows.id+",1,1)'>启用</a> |"
                             }
-                            if (row.hottest=1){
-                                s+="<a href='javascript:update("+row.id+")'>取消最热</a> |"
+                            if (rows.hottest==1){
+                                s+="<a href='javascript:del("+rows.id+",2,2)'>取消最热</a> |"
                             }else {
-                                s+="<a href='javascript:update("+row.id+")'>最热</a> |"
+                                s+="<a href='javascript:del("+rows.id+",2,1)'>最热</a> |"
                             }
-                            if (row.first=1){
-                                s+="<a href='javascript:update("+row.id+")'>取消首发</a> |"
+                            if (rows.first==1){
+                                s+="<a href='javascript:del("+rows.id+",3,2)'>取消首发</a> |"
                             }else {
-                                s+="<a href='javascript:update("+row.id+")'>首发</a> |"
+                                s+="<a href='javascript:del("+rows.id+",3,1)'>首发</a> |"
                             }
-                            s+=" <a href='javascript:del("+row.id+")'>删除</a>"
+                            s+=" <a href='javascript:del("+rows.id+",4,1)'>删除</a>"
                             return s
                         }}
                     ]

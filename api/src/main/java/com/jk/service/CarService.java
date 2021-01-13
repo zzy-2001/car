@@ -23,4 +23,6 @@ public interface CarService {
     void addCar(CarBean bean);
     @RequestMapping("car/findById")
     CarBean findById(@RequestParam("id")Integer id);
+    @RequestMapping("car/voipCar")
+    void voipCar(@RequestParam("id") Integer id, @RequestParam("field") String field,@RequestParam("biz") Integer biz);
 }

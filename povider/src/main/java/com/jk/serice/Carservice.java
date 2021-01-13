@@ -18,4 +18,6 @@ public interface Carservice {
     void addCar(CarBean bean);
 
     CarBean findById(Integer id);
+
+    void voipCar(Integer id, String field, Integer biz);
 }

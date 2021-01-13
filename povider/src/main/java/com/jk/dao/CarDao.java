@@ -26,4 +26,12 @@ public interface CarDao {
     CarBean findById(Integer id);
 
     void upCar(CarBean bean);
+
+    void hotCar(@Param("id")Integer id,@Param("biz") Integer biz);
+
+    void firCar(@Param("id")Integer id,@Param("biz") Integer biz);
+
+    void staCar(@Param("id")Integer id,@Param("biz") Integer biz);
+
+    void delCar(Integer id);
 }

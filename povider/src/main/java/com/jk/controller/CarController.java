@@ -94,4 +94,16 @@ public class CarController {
     public CarBean findById(Integer id){
         return service.findById(id);
     }
+
+    /**
+     * @Author: zzy
+     * @Description: 业务  禁用 |取消最热 |取消首发 | 删除
+     * @Date: 2021/1/13 15:38
+     * @Return: void
+     **/
+    @RequestMapping("voipCar")
+    @ResponseBody
+    public void voipCar(Integer id,String field,Integer biz){
+        service.voipCar(id,field,biz);
+    }
 }

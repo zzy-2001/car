@@ -84,6 +84,19 @@ public class CarServiceImpl implements Carservice {
         return dao.findById(id);
     }
 
+    @Override
+    public void voipCar(Integer id, String field, Integer biz) {
+        if (field.equals("1")){
+            dao.staCar(id,biz);  //状态
+        }else if (field.equals("2")){
+            dao.hotCar(id,biz);  //是否最热
+        }else if (field.equals("3")){
+            dao.firCar(id,biz);  //是否首发
+        }else if (field.equals("4")){
+            dao.delCar(id);    //删除
+        }
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

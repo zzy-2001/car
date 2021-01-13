@@ -58,4 +58,20 @@
 	<update id="upCar">
 		update t_car set name = #{name},typeid = #{typeid},colorid = #{colorid} where id = #{id}
 	</update>
+	<!--是否最热-->
+	<update id="hotCar">
+		update t_car set hottest = #{biz} where id = #{id}
+	</update>
+	<!--是否首发-->
+	<update id="firCar">
+		update t_car set first = #{biz} where id = #{id}
+	</update>
+	<!--状态-->
+	<update id="staCar">
+		update t_car set status = #{biz} where id = #{id}
+	</update>
+	<!--删除-->
+	<delete id="delCar">
+		delete from t_t_car where id = #{id}
+	</delete>
 </mapper>
