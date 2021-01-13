@@ -12,11 +12,20 @@ public class CarBean implements Serializable{
     private Integer hottest;
     private Integer first;
     private Integer status;
+    private Integer colorid;
     //分类列表 t_type
     private String  name1;
     //车型颜色列表: t_color
     private String  name2;
     private String  color;
+
+    public Integer getColorid() {
+        return colorid;
+    }
+
+    public void setColorid(Integer colorid) {
+        this.colorid = colorid;
+    }
 
     public Integer getId() {
         return id;

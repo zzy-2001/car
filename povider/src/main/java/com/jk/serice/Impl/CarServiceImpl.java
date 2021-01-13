@@ -58,6 +58,32 @@ public class CarServiceImpl implements Carservice {
         return map;
     }
 
+    @Override
+    public List<CarBean> findType() {
+        return dao.findType();
+    }
+
+    @Override
+    public List<CarBean> findColor() {
+        return dao.findColor();
+    }
+
+    @Override
+    public void addCar(CarBean bean) {
+        if (bean.getId()==null){
+            //车型新增
+            dao.addCar(bean);
+        }else {
+            //车型修改
+            dao.upCar(bean);
+        }
+    }
+
+    @Override
+    public CarBean findById(Integer id) {
+        return dao.findById(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

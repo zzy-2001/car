@@ -30,12 +30,32 @@
 			<if test="bean.name!=null and bean.name!=''">
 				and c.name  like "%${bean.name}%"
 			</if>
-			<if test="bean.typeid!=null and bean.typeid!=''">
+			<if test="bean.typeid!=null and bean.typeid!=0">
 				and c.typeid=#{bean.typeid}
 			</if>
-			<if test="bean.status!=null and bean.status!=''">
+			<if test="bean.status!=null and bean.status!=0">
 				and c.status=#{bean.status}
 			</if>
 		</where>
 	</sql>
+	<!--车型颜色列表-->
+	<select id="findType" resultType="com.jk.pojo.CarBean">
+		select * from t_type
+	</select>
+	<!--车型颜色列表-->
+	<select id="findColor" resultType="com.jk.pojo.CarBean">
+		select * from t_color
+	</select>
+	<!--车型新增-->
+	<insert id="addCar">
+		insert into t_car values(id,#{name},#{typeid},2,2,2,#{colorid})
+	</insert>
+	<!--车型回显-->
+	<select id="findById" resultType="com.jk.pojo.CarBean">
+		select * from t_car where id = #{id}
+	</select>
+	<!--车型修改-->
+	<update id="upCar">
+		update t_car set name = #{name},typeid = #{typeid},colorid = #{colorid} where id = #{id}
+	</update>
 </mapper>

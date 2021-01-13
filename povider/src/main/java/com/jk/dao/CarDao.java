@@ -16,4 +16,14 @@ public interface CarDao {
     int carTotal(@Param("bean") CarBean bean);
 
     List<CarBean> carPage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") CarBean bean);
+
+    List<CarBean> findType();
+
+    List<CarBean> findColor();
+
+    void addCar(CarBean bean);
+
+    CarBean findById(Integer id);
+
+    void upCar(CarBean bean);
 }

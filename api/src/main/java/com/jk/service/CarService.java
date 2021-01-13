@@ -15,4 +15,12 @@ public interface CarService {
     List<TreeBean> findtree();
     @RequestMapping("car/findCar")
     HashMap<String, Object> findCar(@RequestParam("page") Integer page,@RequestParam("rows")  Integer rows, CarBean bean);
+    @RequestMapping("car/findType")
+    List<CarBean> findType();
+    @RequestMapping("car/findColor")
+    List<CarBean> findColor();
+    @RequestMapping("car/addCar")
+    void addCar(CarBean bean);
+    @RequestMapping("car/findById")
+    CarBean findById(@RequestParam("id")Integer id);
 }

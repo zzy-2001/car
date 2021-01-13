@@ -10,4 +10,12 @@ public interface Carservice {
     List<TreeBean> findtree(int i);
 
     HashMap<String, Object> findCar(Integer page, Integer rows, CarBean bean);
+
+    List<CarBean> findType();
+
+    List<CarBean> findColor();
+
+    void addCar(CarBean bean);
+
+    CarBean findById(Integer id);
 }

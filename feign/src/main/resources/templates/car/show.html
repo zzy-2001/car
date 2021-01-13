@@ -25,6 +25,14 @@
         <div class="form-group">
             <label>车型名称：</label>
             <input type="text" id="names" class="form-control">
+            <label>类型：</label>
+            <select class="form-control" id="typei"></select>
+            <label>状态：</label>
+            <select class="form-control" id="statu">
+                <option value="0">请选择</option>
+                <option value="1">启用</option>
+                <option value="2">禁用</option>
+            </select>
             <button type="button" onclick="sou()" class="btn btn-success glyphicon glyphicon-search">搜索</button>
             <button type="button" onclick="openUser()" class="btn btn-warning glyphicon glyphicon-plus">新增</button>
         </div>
@@ -34,34 +42,37 @@
 </body>
 <script type="text/javascript">
     $(function (){
-        select()
+        select();
+        initPos();
     })
+    //分类列表 t_type
     function initPos(){
         $.ajax({
-            url:'../emp/findPost',//后台请求地址
+            url:'../car/findType',//后台请求地址
             type:'get',
             success:function(data){
                 //拼接下拉列表的字符串
-                var str = "<option value='-1'>请选择</option>";
+                var str = "<option value='0'>请选择</option>";
                 for(var i=0;i<data.length;i++){
                     str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
                 }
-                $("#postid").html(str);
+                $("#typei").html(str);
+                $("#typeid").html(str);
             }
         });
     }
-
+    //车型颜色列表: t_color
     function initTic(){
         $.ajax({
-            url:'../emp/findSct',//后台请求地址
+            url:'../car/findColor',//后台请求地址
             type:'get',
             success:function(data){
                 //拼接下拉列表的字符串
-                var str = "<option value='-1'>请选择</option>";
+                var str = "<option value='0'>请选择</option>";
                 for(var i=0;i<data.length;i++){
                     str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
                 }
-                $("#sctid").html(str);
+                $("#colorid").html(str);
             }
         });
     }
@@ -79,8 +90,8 @@
     }
     function update(id){
         bootbox.dialog({
-            title:'修改商品',
-            message: createAddContent("../emp/toadd"),//弹框内容
+            title:'修改车辆信息',
+            message: createAddContent("../car/toadd"),//弹框内容
             closeButton: true,//是否显示关闭按钮
             buttons : {
                 "success" : {
@@ -89,9 +100,9 @@
                     "callback" : function() {
                         //提交表单数据：保存
                         $.ajax({
-                            url:'../emp/addEmp',//后台请求地址
+                            url:'../car/addCar',//后台请求地址
                             type:'post',
-                            data:$("#userForm").serialize(),//表单序列化
+                            data:$("#carForm").serialize(),//表单序列化
                             //dataType:'json',
                             success:function(){
                                 //刷新表格
@@ -113,15 +124,12 @@
         initPos()
         initTic()
         $.ajax({
-            url:"../emp/findById",
+            url:"../car/findById",
             data:{id:id},
             success:function(data){
                 $("#name").val(data.name)
-                $("#pwd").val(data.pwd)
-                $("#postid").val(data.postid)
-                $("#sctid").val(data.sctid)
-                $("#pay").val(data.pay)
-                $("#motto").val(data.motto)
+                $("#typeid").val(data.typeid)
+                $("#colorid").val(data.colorid)
                 $("#id").val(id)
 
             }
@@ -132,7 +140,7 @@
         initTic()
         bootbox.dialog({
             title:'新增',
-            message: createAddContent("../emp/toadd"),//弹框内容
+            message: createAddContent("../car/toadd"),//弹框内容
             closeButton: true,//是否显示关闭按钮
             buttons : {
                 "success" : {
@@ -141,9 +149,9 @@
                     "callback" : function() {
                         //提交表单数据：保存
                         $.ajax({
-                            url:'../emp/addEmp',//后台请求地址
+                            url:'../car/addCar',//后台请求地址
                             type:'post',
-                            data:$("#userForm").serialize(),//表单序列化
+                            data:$("#carForm").serialize(),//表单序列化
                             //dataType:'json',
                             success:function(){
                                 //刷新表格
@@ -168,7 +176,7 @@
     }
     function del(id){
         $.ajax({
-            url:"../emp/delEmp",
+            url:"../car/delEmp",
             data:{arr:id},
             success:function(){
                 sou()
@@ -195,7 +203,9 @@
                     return {
                         page:this.pageNumber,//第几页
                         rows:this.pageSize,//每页条数
-                        name:$("#names").val()
+                        name:$("#names").val(),
+                        status:$("#statu").val(),
+                        typeid:$("#typei").val()
                     };
                 },
                 columns:[

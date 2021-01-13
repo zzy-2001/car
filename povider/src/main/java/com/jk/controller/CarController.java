@@ -46,4 +46,52 @@ public class CarController {
     public HashMap<String,Object> findCar(Integer page, Integer rows,@RequestBody CarBean bean){
         return service.findCar(page,rows,bean);
     }
+
+    /**
+     * @Author: zzy
+     * @Description:  车型类型查询
+     * @Date: 2021/1/13 14:25
+     * @Return: java.util.List<com.jk.pojo.CarBean>
+     **/
+    @RequestMapping("findType")
+    @ResponseBody
+    public List<CarBean> findType(){
+        return service.findType();
+    }
+
+    /**
+     * @Author: zzy
+     * @Description:  车型颜色列表查询
+     * @Date: 2021/1/13 14:25
+     * @Return: java.util.List<com.jk.pojo.CarBean>
+     **/
+    @RequestMapping("findColor")
+    @ResponseBody
+    public List<CarBean> findColor(){
+        return service.findColor();
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 新增车型
+     * @Date: 2021/1/13 14:39
+     * @Return: void
+     **/
+    @RequestMapping("addCar")
+    @ResponseBody
+    public void addCar(@RequestBody CarBean bean){
+        service.addCar(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 车型回显
+     * @Date: 2021/1/13 15:07
+     * @Return: void
+     **/
+    @RequestMapping("findById")
+    @ResponseBody
+    public CarBean findById(Integer id){
+        return service.findById(id);
+    }
 }
