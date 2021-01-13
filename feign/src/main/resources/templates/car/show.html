@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap-theme.css">
+
+    <!-- 引入jquery文件 -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script type="text/javascript" src="../js/bootstrap/bootstrap3/js/bootstrap.min.js"></script>
+
+    <!-- 引入表格的CSS和JS文件 -->
+    <link rel="stylesheet" href="../js/bootstrap/bootstrap-table/bootstrap-table.css">
+    <script src="../js/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../js/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+    <!-- 引入弹框的js文件 -->
+    <script src="../js/bootstrap/bootstrap-bootbox/bootbox.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <form class="form-inline">
+        <div class="form-group">
+            <label>车型名称：</label>
+            <input type="text" id="names" class="form-control">
+            <button type="button" onclick="sou()" class="btn btn-success glyphicon glyphicon-search">搜索</button>
+            <button type="button" onclick="openUser()" class="btn btn-warning glyphicon glyphicon-plus">新增</button>
+        </div>
+    </form>
+</div>
+    <table id="mytable"></table>
+</body>
+<script type="text/javascript">
+    $(function (){
+        select()
+    })
+    function initPos(){
+        $.ajax({
+            url:'../emp/findPost',//后台请求地址
+            type:'get',
+            success:function(data){
+                //拼接下拉列表的字符串
+                var str = "<option value='-1'>请选择</option>";
+                for(var i=0;i<data.length;i++){
+                    str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
+                }
+                $("#postid").html(str);
+            }
+        });
+    }
+
+    function initTic(){
+        $.ajax({
+            url:'../emp/findSct',//后台请求地址
+            type:'get',
+            success:function(data){
+                //拼接下拉列表的字符串
+                var str = "<option value='-1'>请选择</option>";
+                for(var i=0;i<data.length;i++){
+                    str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
+                }
+                $("#sctid").html(str);
+            }
+        });
+    }
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,//同步，默认是：异步
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+    function update(id){
+        bootbox.dialog({
+            title:'修改商品',
+            message: createAddContent("../emp/toadd"),//弹框内容
+            closeButton: true,//是否显示关闭按钮
+            buttons : {
+                "success" : {
+                    "label" : "<i class='icon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        //提交表单数据：保存
+                        $.ajax({
+                            url:'../emp/addEmp',//后台请求地址
+                            type:'post',
+                            data:$("#userForm").serialize(),//表单序列化
+                            //dataType:'json',
+                            success:function(){
+                                //刷新表格
+                                sou();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='icon-info'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+        initPos()
+        initTic()
+        $.ajax({
+            url:"../emp/findById",
+            data:{id:id},
+            success:function(data){
+                $("#name").val(data.name)
+                $("#pwd").val(data.pwd)
+                $("#postid").val(data.postid)
+                $("#sctid").val(data.sctid)
+                $("#pay").val(data.pay)
+                $("#motto").val(data.motto)
+                $("#id").val(id)
+
+            }
+        })
+    }
+    function openUser(){
+        initPos()
+        initTic()
+        bootbox.dialog({
+            title:'新增',
+            message: createAddContent("../emp/toadd"),//弹框内容
+            closeButton: true,//是否显示关闭按钮
+            buttons : {
+                "success" : {
+                    "label" : "<i class='icon-ok'></i> 保存",
+                    "className" : "btn-sm btn-success",
+                    "callback" : function() {
+                        //提交表单数据：保存
+                        $.ajax({
+                            url:'../emp/addEmp',//后台请求地址
+                            type:'post',
+                            data:$("#userForm").serialize(),//表单序列化
+                            //dataType:'json',
+                            success:function(){
+                                //刷新表格
+                                sou();
+                            }
+                        });
+                    }
+                },
+                "cancel" : {
+                    "label" : "<i class='icon-info'></i> 取消",
+                    "className" : "btn-sm btn-danger",
+                    "callback" : function() {
+
+                    }
+                }
+            }
+
+        });
+    }
+    function sou(){
+        $('#mytable').bootstrapTable("refresh")
+    }
+    function del(id){
+        $.ajax({
+            url:"../emp/delEmp",
+            data:{arr:id},
+            success:function(){
+                sou()
+                bootbox.alert({
+                    size: "small",
+                    title: "提示",
+                    message: "删除成功！！！",
+                    callback: function(){}
+                });
+            }
+        })
+    }
+    function select(){
+            $('#mytable').bootstrapTable({
+                url:'../car/findCar',//获取数据地址
+                toolbar:'#toolbar',//工具栏
+                pagination:true, //是否展示分页
+                pageList:[2, 4, 6, 8],//分页组件
+                pageNumber:1,
+                pageSize:2,//默认每页条数
+                sidePagination:'server',//分页方式：client客户端分页，server服务端分页
+                striped:true,//斑马线
+                queryParams:function(){
+                    return {
+                        page:this.pageNumber,//第几页
+                        rows:this.pageSize,//每页条数
+                        name:$("#names").val()
+                    };
+                },
+                columns:[
+                    [
+                        {field:"name",title:"车型名称"},
+                        {field:"name1",title:"类型"},
+                        {field:"hottest",title:"最热车型",formatter:function (value,row,index){
+                            return value==1?"最热":"/";
+                        }},
+                        {field:"first",title:"首发车型",formatter:function (value,row,index){
+                            return value==1?"首发":"/";
+                        }},
+                        {field:"status",title:"状态",formatter:function (value,row,index){
+                            return value==1?"启用":"禁用";
+                        }},
+                        {field: "qq",title: "操作",formatter:function (value,row,index){
+                            var s=""
+                            s+="<a href='javascript:update("+row.id+")'>编辑</a> |"
+                            if (row.status=1){
+                                s+="<a href='javascript:update("+row.id+")'>禁用</a> |"
+                            }else {
+                                s+="<a href='javascript:update("+row.id+")'>启用</a> |"
+                            }
+                            if (row.hottest=1){
+                                s+="<a href='javascript:update("+row.id+")'>取消最热</a> |"
+                            }else {
+                                s+="<a href='javascript:update("+row.id+")'>最热</a> |"
+                            }
+                            if (row.first=1){
+                                s+="<a href='javascript:update("+row.id+")'>取消首发</a> |"
+                            }else {
+                                s+="<a href='javascript:update("+row.id+")'>首发</a> |"
+                            }
+                            s+=" <a href='javascript:del("+row.id+")'>删除</a>"
+                            return s
+                        }}
+                    ]
+                ]
+
+            });
+    }
+</script>
+</html>

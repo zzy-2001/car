@@ -1,12 +1,14 @@
 package com.jk.serice.Impl;
 
 import com.jk.dao.CarDao;
+import com.jk.pojo.CarBean;
 import com.jk.pojo.TreeBean;
 import com.jk.serice.Carservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -44,6 +46,18 @@ public class CarServiceImpl implements Carservice {
         //}
         return list;
     }
+
+    @Override
+    public HashMap<String, Object> findCar(Integer page, Integer rows, CarBean bean) {
+        int total = dao.carTotal(bean);
+        int start = (page-1)*rows;
+        List<CarBean> list = dao.carPage(start,rows,bean);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("rows",list);
+        return map;
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

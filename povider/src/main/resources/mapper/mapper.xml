@@ -9,5 +9,33 @@
 		left join t_user_role ur on ur.roleid = rp.roleid
 		where ur.userid = #{userid} and tr.pid = #{pid} and tr.location != 'button' GROUP BY tr.id
 	</select>
-
+	<!--车辆信息-->
+	<!--总条数-->
+	<select id="carTotal" resultType="int">
+		select count(1) from t_car c
+		left join t_type t on c.typeid = t.id
+		left join t_color o on c.colorid = o.id
+		<include refid="sql"/>
+	</select>
+	<!--分页查询-->
+	<select id="carPage" resultType="com.jk.pojo.CarBean">
+		select c.*,t.name name1,o.name name2,o.color from t_car c
+		left join t_type t on c.typeid = t.id
+		left join t_color o on c.colorid = o.id
+		<include refid="sql"/>
+		limit #{start},#{rows}
+	</select>
+	<sql id="sql">
+		<where>
+			<if test="bean.name!=null and bean.name!=''">
+				and c.name  like "%${bean.name}%"
+			</if>
+			<if test="bean.typeid!=null and bean.typeid!=''">
+				and c.typeid=#{bean.typeid}
+			</if>
+			<if test="bean.status!=null and bean.status!=''">
+				and c.status=#{bean.status}
+			</if>
+		</where>
+	</sql>
 </mapper>
