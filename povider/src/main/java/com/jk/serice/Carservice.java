@@ -26,4 +26,10 @@ public interface Carservice {
     void delCol(Integer id);
 
     CarBean findByIdCol(Integer id);
+
+    void addTyp(CarBean bean);
+
+    void delTyp(Integer id);
+
+    CarBean findByIdTyp(Integer id);
 }

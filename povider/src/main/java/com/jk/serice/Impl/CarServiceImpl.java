@@ -118,6 +118,27 @@ public class CarServiceImpl implements Carservice {
         return dao.findByIdCol(id);
     }
 
+    @Override
+    public void addTyp(CarBean bean) {
+        if (bean.getId()==null){
+            //类型新增
+            dao.addTyp(bean);
+        }else {
+            //类型修改
+            dao.upTyp(bean);
+        }
+    }
+
+    @Override
+    public void delTyp(Integer id) {
+        dao.delTyp(id);
+    }
+
+    @Override
+    public CarBean findByIdTyp(Integer id) {
+        return dao.findByIdTyp(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

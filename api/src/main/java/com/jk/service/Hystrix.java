@@ -43,4 +43,34 @@ public class Hystrix implements CarService{
     public void voipCar(Integer id, String field, Integer biz) {
 
     }
+
+    @Override
+    public void addCol(CarBean bean) {
+
+    }
+
+    @Override
+    public void delCol(Integer id) {
+
+    }
+
+    @Override
+    public CarBean findByIdCol(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void addTyp(CarBean bean) {
+
+    }
+
+    @Override
+    public void delTyp(Integer id) {
+
+    }
+
+    @Override
+    public CarBean findByIdTyp(Integer id) {
+        return null;
+    }
 }

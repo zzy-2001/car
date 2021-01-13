@@ -90,4 +90,20 @@
 	<select id="findByIdCol" resultType="com.jk.pojo.CarBean">
 		select * from t_color where id = #{id}
 	</select>
+	<!--类型新增-->
+	<insert id="addTyp">
+		insert into t_type values(id,#{name})
+	</insert>
+	<!--类型修改-->
+	<update id="upTyp">
+		update t_type set name = #{name} where id = #{id}
+	</update>
+	<!--类型删除-->
+	<delete id="delTyp">
+		delete from t_type where id = #{id}
+	</delete>
+	<!--类型回显-->
+	<select id="findByIdTyp" resultType="com.jk.pojo.CarBean">
+		select * from t_type where id = #{id}
+	</select>
 </mapper>

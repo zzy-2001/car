@@ -31,4 +31,10 @@ public interface CarService {
     void delCol(@RequestParam("id")Integer id);
     @RequestMapping("car/findByIdCol")
     CarBean findByIdCol(@RequestParam("id")Integer id);
+    @RequestMapping("car/addTyp")
+    void addTyp(CarBean bean);
+    @RequestMapping("car/delTyp")
+    void delTyp(@RequestParam("id")Integer id);
+    @RequestMapping("car/findByIdTyp")
+    CarBean findByIdTyp(@RequestParam("id")Integer id);
 }

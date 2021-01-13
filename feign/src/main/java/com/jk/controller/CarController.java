@@ -42,6 +42,10 @@ public class CarController {
     public String color(){
         return "car/color";
     }
+    @RequestMapping("type")
+    public String type(){
+        return "car/type";
+    }
 
 
     /*
@@ -68,6 +72,10 @@ public class CarController {
     @RequestMapping("toaddCol")
     public String toaddCol(){
         return "car/addCol";
+    }
+    @RequestMapping("toaddTyp")
+    public String toaddTyp(){
+        return "car/addTyp";
     }
 
     /**
@@ -155,7 +163,7 @@ public class CarController {
 
     /**
      * @Author: zzy
-     * @Description:
+     * @Description: 颜色回显
      * @Date: 2021/1/13 16:49
      * @Return: com.jk.pojo.CarBean
      **/
@@ -163,6 +171,44 @@ public class CarController {
     @ResponseBody
     public CarBean findByIdCol(Integer id){
         return service.findByIdCol(id);
+    }
+
+
+    /**
+     * @Author: zzy
+     * @Description: 新增 修改 类型
+     * @Date: 2021/1/13 19:03
+     * @Return: void
+     **/
+    @RequestMapping("addTyp")
+    @ResponseBody
+    public void addTyp(CarBean bean){
+        service.addTyp(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除类型
+     * @Date: 2021/1/13 19:04
+     * @Return: void
+     **/
+    @RequestMapping("delTyp")
+    @ResponseBody
+    public void delTyp(Integer id){
+        service.delTyp(id);
+    }
+
+
+    /**
+     * @Author: zzy
+     * @Description: 类型回显
+     * @Date: 2021/1/13 19:05
+     * @Return: com.jk.pojo.CarBean
+     **/
+    @RequestMapping("findByIdTyp")
+    @ResponseBody
+    public CarBean findByIdTyp(Integer id){
+        return service.findByIdTyp(id);
     }
 
 }
