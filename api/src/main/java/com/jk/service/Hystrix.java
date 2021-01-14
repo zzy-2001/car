@@ -94,4 +94,14 @@ public class Hystrix implements CarService{
     public SloBean findByIdSlo(Integer id) {
         return null;
     }
+
+    @Override
+    public void delSlo(Integer[] arr) {
+
+    }
+
+    @Override
+    public void upSta(Integer integer, Integer id) {
+
+    }
 }

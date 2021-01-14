@@ -34,8 +34,8 @@
 	<div id="toolbar">
 		<form class="form-inline">
 		  <div class="form-group">
-		  	<label for="name1">电影名称：</label>
-		    <input type="text" class="form-control" id="name1" placeholder="请输入电影名">
+		  	<label for="name1">广告名称：</label>
+		    <input type="text" class="form-control" id="name1" placeholder="请输入广告名称">
 		  </div>
 		  <button type="button" onclick="searpage()" class="btn btn-success glyphicon glyphicon-search">搜索</button>		
 		  <input class="btn btn-danger" type="button" value="批量删除" onclick="Alldelete()">
@@ -189,13 +189,24 @@
 			      {field:"stdate",title:"开始时间"},
 			      {field:"endate",title:"结束时间"},
 			      {field:"status",title:"状态",formatter:function(value,row,index){
-		        	  return value;
+					  str = "";
+					  var  d = new Date(row.endate.replace(/-/g, '/'));
+					  var r = new Date() > d;
+					  if (r){
+						  return "失效";
+					  }else {
+						  return value==1?"启用":"禁用";
+					  }
 		          }},
 		          {field:"zz",title:"操作",formatter:function(value,row,index){
 		        	  str = "";
-					  str += "<input type='button' value='删除' onclick='delete1("+row.id+")'>";
-					  str += "<input type='button' value='禁用' onclick='delete1("+row.id+")'>";
-					  str += "<input type='button' value='修改' onclick='openUpdate("+row.id+")'>";
+					  if (row.status==1){
+					  	str += "<input type='button' value='禁用' onclick='upSta("+row.id+",2)'>";
+					  }else {
+					  	str += "<input type='button' value='启用' onclick='upSta("+row.id+",1)'>";
+					  }
+					  str += "<input type='button' value='删除' onclick='delSlo("+row.id+")'>";
+					  str += "<input type='button' value='修改' onclick='delSlo("+row.id+")'>";
 		        	  return str;
 		          }}
 			]
@@ -225,11 +236,21 @@
 			
 		})
 	}
-	function delete1(id) {
+	function delSlo(id) {
     	$.ajax({
-			url:"../page/delete1",
+			url:"../page/delSlo",
 			type:"post",
 			data:{arr:id},
+			success:function(){
+				$('#myTable').bootstrapTable('refresh');
+			}
+		});
+	}
+	function upSta(id,status) {
+    	$.ajax({
+			url:"../page/upSta",
+			type:"post",
+			data:{id:id,status:status},
 			success:function(){
 				$('#myTable').bootstrapTable('refresh');
 			}
@@ -268,7 +289,7 @@
 			  callback: function(result){
 				  if(result){
 					$.ajax({
-						url:"../page/delete1",
+						url:"../page/delSlo",
 						type:"post",
 						data:{arr:ids},
 						success:function(){

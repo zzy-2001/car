@@ -41,4 +41,8 @@ public interface Carservice {
     List<SloBean> findPla();
 
     SloBean findByIdSlo(Integer id);
+
+    void delSlo(Integer[] arr);
+
+    void upSta(Integer integer, Integer status);
 }

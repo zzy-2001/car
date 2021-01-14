@@ -172,6 +172,18 @@ public class CarServiceImpl implements Carservice {
         return dao.findByIdSlo(id);
     }
 
+    @Override
+    public void delSlo(Integer[] arr) {
+        for (int id:arr) {
+            dao.delSlo(id);
+        }
+    }
+
+    @Override
+    public void upSta(Integer id, Integer status) {
+        dao.upSta(id,status);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

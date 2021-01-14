@@ -46,4 +46,8 @@ public interface CarService {
     List<SloBean> findPla();
     @RequestMapping("page/findByIdSlo")
     SloBean findByIdSlo(@RequestParam("id")Integer id);
+    @RequestMapping("page/delSlo")
+    void delSlo(@RequestParam("arr")Integer[] arr);
+    @RequestMapping("page/upSta")
+    void upSta(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
 }

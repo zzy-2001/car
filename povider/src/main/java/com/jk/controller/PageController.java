@@ -67,4 +67,28 @@ public class PageController {
     public SloBean findByIdSlo(Integer id){
         return service.findByIdSlo(id);
     }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除广告
+     * @Date: 2021/1/14 19:09
+     * @Return: void
+     **/
+    @RequestMapping("delSlo")
+    @ResponseBody
+    public void delSlo(Integer[] arr){
+        service.delSlo(arr);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 修改状态
+     * @Date: 2021/1/14 19:13
+     * @Return: void
+     **/
+    @RequestMapping("upSta")
+    @ResponseBody
+    public void upSta(Integer id,Integer status){
+        service.upSta(id,status);
+    }
 }

@@ -63,4 +63,8 @@ public interface CarDao {
     List<SloBean> findPla();
 
     SloBean findByIdSlo(Integer id);
+
+    void delSlo(int id);
+
+    void upSta(Integer id, Integer status);
 }

@@ -143,5 +143,12 @@
 	<select id="findByIdSlo" resultType="com.jk.pojo.SloBean">
 		select * from t_slogan where id = #{id}
 	</select>
-
+	<!--删除-->
+	<delete id="delSlo">
+		delete from t_slogan where id = #{id}
+	</delete>
+	<!--修改状态-->
+	<update id="upSta">
+		update t_slogan set status = #{status} where id = #{id}
+	</update>
 </mapper>
