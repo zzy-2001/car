@@ -151,6 +151,27 @@ public class CarServiceImpl implements Carservice {
         return map;
     }
 
+    @Override
+    public void addSlo(SloBean bean) {
+        if (bean.getId()==null){
+            //广告新增
+            dao.addSlo(bean);
+        }else {
+            //广告修改
+            dao.upSlo(bean);
+        }
+    }
+
+    @Override
+    public List<SloBean> findPla() {
+        return dao.findPla();
+    }
+
+    @Override
+    public SloBean findByIdSlo(Integer id) {
+        return dao.findByIdSlo(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

@@ -51,7 +51,7 @@
 	//打开修改弹框：回显表单数据
 	function openUpdate(id){
 		bootbox.dialog({
-			title:'修改电影',
+			title:'修改广告',
 		    message: createAddContent("../page/toAdd"),//弹框内容
 		    closeButton: true,//是否显示关闭按钮
 		    buttons : {
@@ -61,9 +61,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../page/addpage',
+		            		url:'../page/addSlo',
 		            		type:'post',
-		            		data:$("#pageFrom").serialize(),//表单序列化
+		            		data:$("#sloFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -83,62 +83,41 @@
 		    
 		});	
 		$.ajax({
-			url:"../page/findById",
+			url:"../page/findByIdSlo",
 			type:"post",
 			data:{id:id},
 			success:function(data){
-				initPro();//省
-				intiCity(data.sheng);
+				initPla();//广告位置表
 				$("#id").val(data.id);
 				$("#name").val(data.name);
-				$("#showDate").val(data.showDate);
-				$("#score").val(data.score);
-				$("#clicks").val(data.clicks);
-				$("#synopsis").val(data.synopsis);
-				$("#province").val(data.sheng);
-				$("#city").val(data.shi);
-				$("#typeid").val(data.typeid);
+				$("#picture").val(data.picture);
+				$("#stdate").val(data.stdate);
+				$("#endate").val(data.endate);
+				$("#placeid").val(data.placeid);
+				$("#site").val(data.site);
 				//图片
-				$("#testimg").val(data.img);
-				uploadFile(data.img);
+				$("#picture").val(data.picture);
+				uploadFile(data.picture);
 			}
 		})
 	}
-	//初始化省的数据
-	function initPro(){
+	//初始化广告位置的数据
+	function initPla(){
 		$.ajax({
-			url:'../page/queryArea',//后台请求地址
+			url:'../page/findPla',//后台请求地址
 			type:'get',
 			async:false,
-			data:{pid:0},
 			success:function(data){
 				//拼接下拉列表的字符串
 				var str = "<option value='-1'>请选择</option>";
 				for(var i=0;i<data.length;i++){
 					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
 				}
-				$("#province").html(str);
+				$("#placeid").html(str);
 			}
 		});	
 	}
-	
-	//加载市的数据
-	function intiCity(pid){
-		$.ajax({
-			url:'../page/queryArea',//后台请求地址
-			type:'get',
-			async:false,
-			data:{pid:pid},
-			success:function(data){
-				//拼接下拉列表的字符串
-				var str = "<option value='-1'>请选择</option>";
-				for(var i=0;i<data.length;i++){
-					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
-				}
-				$("#city").html(str);
-			}
-		});		
-	}
+
 	var res;
 	function createAddContent(url){
 		$.ajax({
@@ -163,9 +142,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../page/addpage',//后台请求地址
+		            		url:'../page/addSlo',//后台请求地址
 		            		type:'post',
-		            		data:$("#pageFrom").serialize(),//表单序列化
+		            		data:$("#sloFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -186,7 +165,7 @@
 		});	
 		
 		//初始化省的数据
-		initPro();
+		initPla();
 		//加载上传图片
 		uploadFile();
 	}

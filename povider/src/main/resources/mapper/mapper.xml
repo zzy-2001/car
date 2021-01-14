@@ -127,4 +127,21 @@
 			</if>
 		</where>
 	</sql>
+	<!--新增广告-->
+	<insert id="addSlo">
+		insert  into t_slogan values(id,#{name},#{picture},#{stdate},#{endate},2,#{placeid},#{site})
+	</insert>
+	<!--修改广告-->
+	<update id="upSlo">
+		update t_slogan set name = #{name},picture = #{picture},stdate = #{stdate},endate = #{endate},placeid = #{placeid},site = #{site} where id = #{id}
+	</update>
+	<!--广告位置表查询-->
+	<select id="findPla" resultType="com.jk.pojo.SloBean">
+		select * from t_place
+	</select>
+	<!--回显-->
+	<select id="findByIdSlo" resultType="com.jk.pojo.SloBean">
+		select * from t_slogan where id = #{id}
+	</select>
+
 </mapper>

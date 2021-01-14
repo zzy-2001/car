@@ -40,4 +40,10 @@ public interface CarService {
     CarBean findByIdTyp(@RequestParam("id")Integer id);
     @RequestMapping("page/findSlo")
     HashMap<String, Object> findSlo(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, SloBean bean);
+    @RequestMapping("page/addSlo")
+    void addSlo(SloBean bean);
+    @RequestMapping("page/findPla")
+    List<SloBean> findPla();
+    @RequestMapping("page/findByIdSlo")
+    SloBean findByIdSlo(@RequestParam("id")Integer id);
 }

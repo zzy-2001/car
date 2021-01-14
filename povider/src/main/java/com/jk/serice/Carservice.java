@@ -35,4 +35,10 @@ public interface Carservice {
     CarBean findByIdTyp(Integer id);
 
     HashMap<String, Object> findSlo(Integer page, Integer rows, SloBean bean);
+
+    void addSlo(SloBean bean);
+
+    List<SloBean> findPla();
+
+    SloBean findByIdSlo(Integer id);
 }

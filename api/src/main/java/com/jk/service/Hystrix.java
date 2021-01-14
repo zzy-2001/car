@@ -79,4 +79,19 @@ public class Hystrix implements CarService{
     public HashMap<String, Object> findSlo(Integer page, Integer rows, SloBean bean) {
         return null;
     }
+
+    @Override
+    public void addSlo(SloBean bean) {
+
+    }
+
+    @Override
+    public List<SloBean> findPla() {
+        return null;
+    }
+
+    @Override
+    public SloBean findByIdSlo(Integer id) {
+        return null;
+    }
 }

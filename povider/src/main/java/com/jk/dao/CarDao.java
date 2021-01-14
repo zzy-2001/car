@@ -55,4 +55,12 @@ public interface CarDao {
     int sloTotal(@Param("bean")SloBean bean);
 
     List<CarBean> sloPage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") SloBean bean);
+
+    void addSlo(SloBean bean);
+
+    void upSlo(SloBean bean);
+
+    List<SloBean> findPla();
+
+    SloBean findByIdSlo(Integer id);
 }

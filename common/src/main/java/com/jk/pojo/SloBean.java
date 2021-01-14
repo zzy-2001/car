@@ -10,10 +10,8 @@ public class SloBean {
     private Integer id;
     private String  name;
     private String picture;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date stdate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date endate;
+    private String stdate;
+    private String endate;
     private Integer status;
     private Integer placeid;
     private String  site;
@@ -45,19 +43,19 @@ public class SloBean {
         this.picture = picture;
     }
 
-    public Date getStdate() {
+    public String getStdate() {
         return stdate;
     }
 
-    public void setStdate(Date stdate) {
+    public void setStdate(String stdate) {
         this.stdate = stdate;
     }
 
-    public Date getEndate() {
+    public String getEndate() {
         return endate;
     }
 
-    public void setEndate(Date endate) {
+    public void setEndate(String endate) {
         this.endate = endate;
     }
 
