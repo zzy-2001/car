@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.springframework.stereotype.Component;
 
@@ -71,6 +72,11 @@ public class Hystrix implements CarService{
 
     @Override
     public CarBean findByIdTyp(Integer id) {
+        return null;
+    }
+
+    @Override
+    public HashMap<String, Object> findSlo(Integer page, Integer rows, SloBean bean) {
         return null;
     }
 }

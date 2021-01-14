@@ -1,6 +1,7 @@
 package com.jk.dao;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,4 +51,8 @@ public interface CarDao {
     void delTyp(Integer id);
 
     CarBean findByIdTyp(Integer id);
+
+    int sloTotal(@Param("bean")SloBean bean);
+
+    List<CarBean> sloPage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") SloBean bean);
 }

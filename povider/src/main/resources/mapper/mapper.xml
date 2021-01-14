@@ -106,4 +106,25 @@
 	<select id="findByIdTyp" resultType="com.jk.pojo.CarBean">
 		select * from t_type where id = #{id}
 	</select>
+	<!--首页管理-->
+	<!--总条数-->
+	<select id="sloTotal" resultType="int">
+		select count(1) status1 from t_slogan s
+		left join t_place p on s.placeid = p.id
+		<include refid="sql1"/>
+	</select>
+	<!--分页查询-->
+	<select id="sloPage" resultType="com.jk.pojo.SloBean">
+		select s.*,p.name name1,p.status status1 from t_slogan s
+		left join t_place p on s.placeid = p.id
+		<include refid="sql1"/>
+		limit #{start},#{rows}
+	</select>
+	<sql id="sql1">
+		<where>
+			<if test="bean.name!=null and bean.name!=''">
+				and s.name like "%${bean.name}%"
+			</if>
+		</where>
+	</sql>
 </mapper>

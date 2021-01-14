@@ -1,6 +1,7 @@
 package com.jk.serice;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 
 import java.util.HashMap;
@@ -32,4 +33,6 @@ public interface Carservice {
     void delTyp(Integer id);
 
     CarBean findByIdTyp(Integer id);
+
+    HashMap<String, Object> findSlo(Integer page, Integer rows, SloBean bean);
 }

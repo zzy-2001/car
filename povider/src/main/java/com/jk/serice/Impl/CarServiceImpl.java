@@ -2,6 +2,7 @@ package com.jk.serice.Impl;
 
 import com.jk.dao.CarDao;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import com.jk.serice.Carservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,6 +138,17 @@ public class CarServiceImpl implements Carservice {
     @Override
     public CarBean findByIdTyp(Integer id) {
         return dao.findByIdTyp(id);
+    }
+
+    @Override
+    public HashMap<String, Object> findSlo(Integer page, Integer rows, SloBean bean) {
+        int total = dao.sloTotal(bean);
+        int start = (page-1)*rows;
+        List<CarBean> list = dao.sloPage(start,rows,bean);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("rows",list);
+        return map;
     }
 
     private List<TreeBean> findtree(int pid,int userid) {

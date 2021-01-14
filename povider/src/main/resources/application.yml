@@ -2,6 +2,9 @@ server:
   port: 8081
 
 spring:
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/four

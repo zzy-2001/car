@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,4 +38,6 @@ public interface CarService {
     void delTyp(@RequestParam("id")Integer id);
     @RequestMapping("car/findByIdTyp")
     CarBean findByIdTyp(@RequestParam("id")Integer id);
+    @RequestMapping("page/findSlo")
+    HashMap<String, Object> findSlo(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, SloBean bean);
 }
