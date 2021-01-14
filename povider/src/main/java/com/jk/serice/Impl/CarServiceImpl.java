@@ -184,6 +184,33 @@ public class CarServiceImpl implements Carservice {
         dao.upSta(id,status);
     }
 
+    @Override
+    public void addPla(SloBean bean) {
+        if (bean.getId()==null){
+            //广告位置新增
+            dao.addPla(bean);
+        }else {
+            //广告位置修改
+            dao.upPla(bean);
+        }
+
+    }
+
+    @Override
+    public SloBean findByIdPla(Integer id) {
+        return dao.findByIdPla(id);
+    }
+
+    @Override
+    public void delPla(Integer id) {
+        dao.delPla(id);
+    }
+
+    @Override
+    public void upSts(Integer id, Integer status) {
+        dao.upSts(id,status);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

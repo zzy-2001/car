@@ -22,6 +22,10 @@ public class PageController {
     public String slo(){
         return "page/slo";
     }
+    @RequestMapping("pla")
+    public String pla(){
+        return "page/pla";
+    }
     /**
      * @Author: zzy
      * @Description: 广告表查询新增
@@ -37,6 +41,10 @@ public class PageController {
     public String toAdd(){
         return "page/add";
     }
+    @RequestMapping("toAddPla")
+    public String toAddPla(){
+        return "page/addPla";
+    }
 
     /**
      * @Author: zzy
@@ -49,7 +57,6 @@ public class PageController {
     public void addSlo(SloBean bean){
         service.addSlo(bean);
     }
-
     /**
      * @Author: zzy
      * @Description: 广告位置查询
@@ -74,7 +81,6 @@ public class PageController {
     public SloBean findByIdSlo(Integer id){
         return service.findByIdSlo(id);
     }
-
     /**
      * @Author: zzy
      * @Description: 删除广告
@@ -98,5 +104,52 @@ public class PageController {
     public void upSta(Integer id,Integer status){
         service.upSta(id,status);
     }
+    /**
+     * @Author: zzy
+     * @Description: 新增 修改 广告位置
+     * @Date: 2021/1/14 19:38
+     * @Return: void
+     **/
+    @RequestMapping("addPla")
+    @ResponseBody
+    public void addPla(SloBean bean){
+        service.addPla(bean);
+    }
 
+    /**
+     * @Author: zzy
+     * @Description: 回显广告位置
+     * @Date: 2021/1/14 17:16
+     * @Return: com.jk.pojo.CarBean
+     *
+     * @return*/
+    @RequestMapping("findByIdPla")
+    @ResponseBody
+    public SloBean findByIdPla(Integer id){
+        return service.findByIdPla(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除广告位置
+     * @Date: 2021/1/14 19:47
+     * @Return: void
+     **/
+    @RequestMapping("delPla")
+    @ResponseBody
+    public void delPla(Integer id){
+        service.delPla(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 修改状态2
+     * @Date: 2021/1/14 20:06
+     * @Return: void
+     **/
+    @RequestMapping("upSts")
+    @ResponseBody
+    public void upSts(Integer id,Integer status){
+        service.upSts(id,status);
+    }
 }

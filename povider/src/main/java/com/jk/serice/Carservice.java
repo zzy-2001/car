@@ -45,4 +45,12 @@ public interface Carservice {
     void delSlo(Integer[] arr);
 
     void upSta(Integer integer, Integer status);
+
+    void addPla(SloBean bean);
+
+    SloBean findByIdPla(Integer id);
+
+    void delPla(Integer id);
+
+    void upSts(Integer id, Integer status);
 }

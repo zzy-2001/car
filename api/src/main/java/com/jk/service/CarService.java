@@ -50,4 +50,12 @@ public interface CarService {
     void delSlo(@RequestParam("arr")Integer[] arr);
     @RequestMapping("page/upSta")
     void upSta(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
+    @RequestMapping("page/addPla")
+    void addPla(SloBean bean);
+    @RequestMapping("page/findByIdPla")
+    SloBean findByIdPla(@RequestParam("id")Integer id);
+    @RequestMapping("page/delPla")
+    void delPla(@RequestParam("id")Integer id);
+    @RequestMapping("page/upSts")
+    void upSts(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
 }

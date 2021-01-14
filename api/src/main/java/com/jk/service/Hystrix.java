@@ -104,4 +104,24 @@ public class Hystrix implements CarService{
     public void upSta(Integer integer, Integer id) {
 
     }
+
+    @Override
+    public void addPla(SloBean bean) {
+
+    }
+
+    @Override
+    public SloBean findByIdPla(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void delPla(Integer id) {
+
+    }
+
+    @Override
+    public void upSts(Integer id, Integer status) {
+
+    }
 }

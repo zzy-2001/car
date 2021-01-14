@@ -49,7 +49,7 @@
 		initUserTable();
 	})
 	//打开修改弹框：回显表单数据
-	function openUpdate(id){
+	function upSlo(id){
 		bootbox.dialog({
 			title:'修改广告',
 		    message: createAddContent("../page/toAdd"),//弹框内容
@@ -206,7 +206,7 @@
 					  	str += "<input type='button' value='启用' onclick='upSta("+row.id+",1)'>";
 					  }
 					  str += "<input type='button' value='删除' onclick='delSlo("+row.id+")'>";
-					  str += "<input type='button' value='修改' onclick='delSlo("+row.id+")'>";
+					  str += "<input type='button' value='修改' onclick='upSlo("+row.id+")'>";
 		        	  return str;
 		          }}
 			]
