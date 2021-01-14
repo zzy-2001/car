@@ -1,6 +1,7 @@
 package com.jk.dao;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.NewsBean;
 import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.apache.ibatis.annotations.Mapper;
@@ -77,4 +78,8 @@ public interface CarDao {
     void delPla(Integer id);
 
     void upSts(Integer id, Integer status);
+
+    int newTotal(@Param("bean")NewsBean bean);
+
+    List<CarBean> newPage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") NewsBean bean);
 }

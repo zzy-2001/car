@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.NewsBean;
 import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ public interface CarService {
     @RequestMapping("car/findtree")
     List<TreeBean> findtree();
     @RequestMapping("car/findCar")
-    HashMap<String, Object> findCar(@RequestParam("page") Integer page,@RequestParam("rows")  Integer rows, CarBean bean);
+    HashMap<String, Object> findCar(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, CarBean bean);
     @RequestMapping("car/findType")
     List<CarBean> findType();
     @RequestMapping("car/findColor")
@@ -58,4 +59,6 @@ public interface CarService {
     void delPla(@RequestParam("id")Integer id);
     @RequestMapping("page/upSts")
     void upSts(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
+    @RequestMapping("new/findNew")
+    HashMap<String, Object> findNew(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, NewsBean bean);
 }

@@ -1,6 +1,7 @@
 package com.jk.serice;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.NewsBean;
 import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 
@@ -53,4 +54,6 @@ public interface Carservice {
     void delPla(Integer id);
 
     void upSts(Integer id, Integer status);
+
+    HashMap<String, Object> findNew(Integer page, Integer rows, NewsBean bean);
 }

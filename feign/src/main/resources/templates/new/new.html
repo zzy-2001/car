@@ -1,0 +1,284 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- 引入bootstap的css文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap-theme.css">
+
+<!-- 引入jquery文件 -->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+<!-- 引入bootstrap的js文件 -->
+<script type="text/javascript" src="../js/bootstrap/bootstrap3/js/bootstrap.min.js"></script>
+
+<!-- 引入表格的css和js文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-table/bootstrap-table.css">
+<script src="../js/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../js/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<!-- 引入弹框的js文件 -->
+<script src="../js/bootstrap/bootstrap-bootbox/bootbox.js"></script>
+
+<!-- 引入日期得css和js文件 -->
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+
+<!-- 引入上传文件的css和js文件 -->
+<script src="../js/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-fileinput/css/fileinput.css">
+</head>
+<body>
+	<div id="toolbar">
+		<form class="form-inline">
+		  <div class="form-group">
+		  	<label for="name1">广告名称：</label>
+		    <input type="text" class="form-control" id="name1" placeholder="请输入广告名称">
+		  </div>
+		  <button type="button" onclick="searnew()" class="btn btn-success glyphicon glyphicon-search">搜索</button>		
+		  <button type="button" onclick="opennew()" class="btn btn-warning glyphicon glyphicon-plus">新增</button>
+		</form>
+	</div>
+	<table class="table" id="myTable"></table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		initUserTable();
+	})
+	//打开修改弹框：回显表单数据
+	function upSlo(id){
+		bootbox.dialog({
+			title:'修改广告',
+		    message: createAddContent("../new/toAdd"),//弹框内容
+		    closeButton: true,//是否显示关闭按钮
+		    buttons : {
+		        "success" : {
+		            "label" : "<i class='icon-ok'></i> 保存",
+		            "className" : "btn-sm btn-success",
+		            "callback" : function() {
+		            	//提交表单数据：保存
+		            	$.ajax({
+		            		url:'../new/addSlo',
+		            		type:'post',
+		            		data:$("#sloFrom").serialize(),//表单序列化
+		            		//dataType:'json',
+		            		success:function(){
+		            			//刷新表格
+		            		searnew();
+		            		}
+		            	}); 
+			        }
+		        },
+		        "cancel" : {
+		            "label" : "<i class='icon-info'></i> 取消",
+		            "className" : "btn-sm btn-danger",
+		            "callback" : function() {
+		            	
+		            }
+		        }
+		    }
+		    
+		});	
+		$.ajax({
+			url:"../new/findByIdSlo",
+			type:"post",
+			data:{id:id},
+			success:function(data){
+				initPla();//广告位置表
+				$("#id").val(data.id);
+				$("#name").val(data.name);
+				$("#picture").val(data.picture);
+				$("#stdate").val(data.stdate);
+				$("#endate").val(data.endate);
+				$("#placeid").val(data.placeid);
+				$("#site").val(data.site);
+				//图片
+				$("#picture").val(data.picture);
+				uploadFile(data.picture);
+			}
+		})
+	}
+	//初始化广告位置的数据
+	function initPla(){
+		$.ajax({
+			url:'../new/findPla',//后台请求地址
+			type:'get',
+			async:false,
+			success:function(data){
+				//拼接下拉列表的字符串
+				var str = "<option value='-1'>请选择</option>";
+				for(var i=0;i<data.length;i++){
+					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
+				}
+				$("#placeid").html(str);
+			}
+		});	
+	}
+
+	var res;
+	function createAddContent(url){
+		$.ajax({
+			url:url,
+			async:false,//同步，默认是：异步
+			success:function(data){
+				res = data;
+			}
+		});
+		return res;
+	}
+	//打开新增弹框
+	function opennew(){
+		bootbox.dialog({
+			title:'添加广告',
+		    message: createAddContent("../new/toAdd"),//弹框内容
+		    closeButton: true,//是否显示关闭按钮
+		    buttons : {
+		        "success" : {
+		            "label" : "<i class='icon-ok'></i> 保存",
+		            "className" : "btn-sm btn-success",
+		            "callback" : function() {
+		            	//提交表单数据：保存
+		            	$.ajax({
+		            		url:'../new/addSlo',//后台请求地址
+		            		type:'post',
+		            		data:$("#sloFrom").serialize(),//表单序列化
+		            		//dataType:'json',
+		            		success:function(){
+		            			//刷新表格
+		            			searnew();
+		            		}
+		            	}); 
+			        }
+		        },
+		        "cancel" : {
+		            "label" : "<i class='icon-info'></i> 取消",
+		            "className" : "btn-sm btn-danger",
+		            "callback" : function() {
+		            	
+		            }
+		        }
+		    }
+		    
+		});	
+		
+		//初始化省的数据
+		initPla();
+		//加载上传图片
+		uploadFile();
+	}
+	//条查
+	function searnew(){
+		$('#myTable').bootstrapTable('refresh');//刷新表格
+	}
+	//加载表格
+	function initUserTable(){
+		$('#myTable').bootstrapTable({
+			url:'../new/findNew',//获取数据地址
+			columns:[
+					[
+				  {field:"xx",checkbox:true},
+			      {field:"id",title:"序号"},
+			      {field:"title",title:"新闻标题"},
+			      {field:"typeid",title:"类型"},
+			      {field:"view",title:"图片",formatter:function(value,row,index){
+		        	  str = "<img width='50px' height='50px' src='"+value+"'>";
+		        	  return str;
+		          }},
+			      {field:"stdate",title:"开始时间"},
+			      {field:"status",title:"状态",formatter:function(value,row,index){
+					  return value==1?"启用":"禁用";
+		          }},
+		          {field:"zz",title:"操作",formatter:function(value,row,index){
+		        	  str = "";
+					  if (row.status==1){
+					  	str += "<input type='button' value='禁用' onclick='upSta("+row.id+",2)'>";
+					  }else {
+					  	str += "<input type='button' value='启用' onclick='upSta("+row.id+",1)'>";
+					  }
+					  str += "<input type='button' value='删除' onclick='delSlo("+row.id+")'>";
+					  str += "<input type='button' value='编辑' onclick='upSlo("+row.id+")'>";
+		        	  return str;
+		          }}
+			]
+			],
+		    toolbar:'#toolbar',
+		    pagination:true, //是否展示分页
+		    newList:[5, 10, 20, 50],//分页组件
+		    newNumber:1,
+		    newSize:5,//默认每页条数
+		    //search:true,//是否显示搜索框
+		    //searchText:'试试',//初始化搜索文字
+		    showColumns:false,//是否显示 内容列下拉框
+		    showToggle:false,//是否显示 切换试图（table/card）按钮
+		    showPaginationSwitch:false,//是否显示 数据条数选择框
+		    showRefresh:false,//是否显示刷新按钮
+		    detailView:false,//设置为 true 可以显示详细页面模式。
+		    showFooter:false,//是否显示列脚clickToSelect: true, //是否启用点击选中行
+		    sidePagination:'server',//分页方式：client客户端分页，server服务端分页
+		    striped:true,
+		    queryParams:function(){
+			    return {
+				    page: this.newNumber,
+				    rows: this.newSize,
+				    name:$("#name1").val(),
+			    };
+		    },
+			
+		})
+	}
+	function delSlo(id) {
+    	$.ajax({
+			url:"../new/delSlo",
+			type:"post",
+			data:{arr:id},
+			success:function(){
+				$('#myTable').bootstrapTable('refresh');
+			}
+		});
+	}
+	function upSta(id,status) {
+    	$.ajax({
+			url:"../new/upSta",
+			type:"post",
+			data:{id:id,status:status},
+			success:function(){
+				$('#myTable').bootstrapTable('refresh');
+			}
+		});
+	}
+	//上传图片
+	function uploadFile(url){
+		$('#userImg').fileinput({
+			initialPreview:url,
+			//初始化图片配置：
+			initialPreviewConfig: [
+			    {key: 1, showDelete: false}
+			],
+			//是否初始化图片显示
+			initialPreviewAsData: true,
+			language: 'zh', //设置语言
+			uploadUrl: '<%=request.getContextPath()%>/new/uploadUserImg', //上传的地址
+			allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+			showUpload: true, //是否显示上传按钮
+			showCaption: false,//是否显示标题
+			browseClass: "btn btn-primary", //按钮样式 
+			maxFileCount: 2, //表示允许同时上传的最大文件个数
+			enctype: 'multipart/form-data',
+			validateInitialCount:true,
+			previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+			msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+			
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			//var imgval = $('#testimg').val();
+			//if(imgval == null || imgval == "" || imgval == undefined){
+			var	imgval = "http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/upload/"+data.response;
+			//}else{
+			//	imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
+			//}
+			$('#testimg').val(imgval);
+		});	
+	}
+</script>
+</html>

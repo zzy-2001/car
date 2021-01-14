@@ -1,6 +1,7 @@
 package com.jk.service;
 
 import com.jk.pojo.CarBean;
+import com.jk.pojo.NewsBean;
 import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import org.springframework.stereotype.Component;
@@ -123,5 +124,10 @@ public class Hystrix implements CarService{
     @Override
     public void upSts(Integer id, Integer status) {
 
+    }
+
+    @Override
+    public HashMap<String, Object> findNew(Integer page, Integer rows, NewsBean bean) {
+        return null;
     }
 }

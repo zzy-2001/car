@@ -171,4 +171,25 @@
 	<update id="upSts">
 		update t_place set status = #{status} where id = #{id}
 	</update>
+	<!--新闻动态-->
+	<!--总条数-->
+	<select id="newTotal" resultType="int">
+		select count(1) from t_news n
+		left join t_ntype t on n.typeid = t.id
+		<include refid="sql2"/>
+	</select>
+	<!--分页查询-->
+	<select id="newPage" resultType="com.jk.pojo.NewsBean">
+		select n.*,t.name from t_news n
+		left join t_ntype t on n.typeid = t.id
+		<include refid="sql2"/>
+		limit #{start},#{rows}
+	</select>
+	<sql id="sql2">
+		<where>
+			<if test="bean.name!=null and bean.name!=''">
+				and n.title like "%${bean.name}%"
+			</if>
+		</where>
+	</sql>
 </mapper>

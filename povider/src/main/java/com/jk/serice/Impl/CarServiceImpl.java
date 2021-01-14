@@ -2,6 +2,7 @@ package com.jk.serice.Impl;
 
 import com.jk.dao.CarDao;
 import com.jk.pojo.CarBean;
+import com.jk.pojo.NewsBean;
 import com.jk.pojo.SloBean;
 import com.jk.pojo.TreeBean;
 import com.jk.serice.Carservice;
@@ -209,6 +210,17 @@ public class CarServiceImpl implements Carservice {
     @Override
     public void upSts(Integer id, Integer status) {
         dao.upSts(id,status);
+    }
+
+    @Override
+    public HashMap<String, Object> findNew(Integer page, Integer rows, NewsBean bean) {
+        int total = dao.newTotal(bean);
+        int start = (page-1)*rows;
+        List<CarBean> list = dao.newPage(start,rows,bean);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("rows",list);
+        return map;
     }
 
     private List<TreeBean> findtree(int pid,int userid) {
