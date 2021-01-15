@@ -194,7 +194,6 @@ public class CarServiceImpl implements Carservice {
             //广告位置修改
             dao.upPla(bean);
         }
-
     }
 
     @Override
@@ -221,6 +220,37 @@ public class CarServiceImpl implements Carservice {
         map.put("total",total);
         map.put("rows",list);
         return map;
+    }
+
+    @Override
+    public void addNew(NewsBean bean) {
+        if (bean.getId()==null){
+            //新闻新增
+            dao.addNew(bean);
+        }else {
+            //新闻修改
+            dao.upNew(bean);
+        }
+    }
+
+    @Override
+    public List<NewsBean> findNty() {
+        return dao.findNty();
+    }
+
+    @Override
+    public NewsBean findByIdNew(Integer id) {
+        return dao.findByIdNew(id);
+    }
+
+    @Override
+    public void delNew(Integer id) {
+        dao.delNew(id);
+    }
+
+    @Override
+    public void nupSta(Integer id, Integer status) {
+        dao.nupSta(id,status);
     }
 
     private List<TreeBean> findtree(int pid,int userid) {

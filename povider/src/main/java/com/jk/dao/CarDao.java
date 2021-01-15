@@ -82,4 +82,16 @@ public interface CarDao {
     int newTotal(@Param("bean")NewsBean bean);
 
     List<CarBean> newPage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") NewsBean bean);
+
+    void addNew(NewsBean bean);
+
+    void upNew(NewsBean bean);
+
+    List<NewsBean> findNty();
+
+    NewsBean findByIdNew(Integer id);
+
+    void delNew(Integer id);
+
+    void nupSta(Integer id, Integer status);
 }

@@ -174,7 +174,7 @@
     	$.ajax({
 			url:"../page/delPla",
 			type:"post",
-			data:{arr:id},
+			data:{id:id},
 			success:function(){
 				$('#myTable').bootstrapTable('refresh');
 			}

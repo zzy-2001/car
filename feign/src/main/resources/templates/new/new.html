@@ -60,9 +60,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../new/addSlo',
+		            		url:'../new/addNew',
 		            		type:'post',
-		            		data:$("#sloFrom").serialize(),//表单序列化
+		            		data:$("#newFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -82,28 +82,25 @@
 		    
 		});	
 		$.ajax({
-			url:"../new/findByIdSlo",
+			url:"../new/findByIdNew",
 			type:"post",
 			data:{id:id},
 			success:function(data){
-				initPla();//广告位置表
+				initPla();//类型表
 				$("#id").val(data.id);
-				$("#name").val(data.name);
-				$("#picture").val(data.picture);
+				$("#title").val(data.title);
+				$("#typeid").val(data.typeid);
 				$("#stdate").val(data.stdate);
-				$("#endate").val(data.endate);
-				$("#placeid").val(data.placeid);
-				$("#site").val(data.site);
+				$("#view").val(data.view);
 				//图片
-				$("#picture").val(data.picture);
-				uploadFile(data.picture);
+				uploadFile(data.view);
 			}
 		})
 	}
 	//初始化广告位置的数据
 	function initPla(){
 		$.ajax({
-			url:'../new/findPla',//后台请求地址
+			url:'../new/findNty',//后台请求地址
 			type:'get',
 			async:false,
 			success:function(data){
@@ -112,7 +109,7 @@
 				for(var i=0;i<data.length;i++){
 					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
 				}
-				$("#placeid").html(str);
+				$("#typeid").html(str);
 			}
 		});	
 	}
@@ -141,9 +138,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../new/addSlo',//后台请求地址
+		            		url:'../new/addNew',//后台请求地址
 		            		type:'post',
-		            		data:$("#sloFrom").serialize(),//表单序列化
+		            		data:$("#newFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -193,11 +190,11 @@
 		          {field:"zz",title:"操作",formatter:function(value,row,index){
 		        	  str = "";
 					  if (row.status==1){
-					  	str += "<input type='button' value='禁用' onclick='upSta("+row.id+",2)'>";
+					  	str += "<input type='button' value='禁用' onclick='nupSta("+row.id+",2)'>";
 					  }else {
-					  	str += "<input type='button' value='启用' onclick='upSta("+row.id+",1)'>";
+					  	str += "<input type='button' value='启用' onclick='nupSta("+row.id+",1)'>";
 					  }
-					  str += "<input type='button' value='删除' onclick='delSlo("+row.id+")'>";
+					  str += "<input type='button' value='删除' onclick='delNew("+row.id+")'>";
 					  str += "<input type='button' value='编辑' onclick='upSlo("+row.id+")'>";
 		        	  return str;
 		          }}
@@ -228,19 +225,19 @@
 			
 		})
 	}
-	function delSlo(id) {
+	function delNew(id) {
     	$.ajax({
-			url:"../new/delSlo",
+			url:"../new/delNew",
 			type:"post",
-			data:{arr:id},
+			data:{id:id},
 			success:function(){
 				$('#myTable').bootstrapTable('refresh');
 			}
 		});
 	}
-	function upSta(id,status) {
+	function nupSta(id,status) {
     	$.ajax({
-			url:"../new/upSta",
+			url:"../new/nupSta",
 			type:"post",
 			data:{id:id,status:status},
 			success:function(){

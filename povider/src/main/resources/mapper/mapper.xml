@@ -192,4 +192,28 @@
 			</if>
 		</where>
 	</sql>
+	<!--新增新闻-->
+	<insert id="addNew">
+		insert into t_news values(id,#{title},#{typeid},#{view},#{stdate},2)
+	</insert>
+	<!--修改新闻-->
+	<update id="upNew">
+		update t_news set title = #{title},typeid = #{typeid},view = #{view},stdate = #{stdate} where id = #{id}
+	</update>
+	<!--查询类型表-->
+	<select id="findNty" resultType="com.jk.pojo.NewsBean">
+		select * from t_ntype
+	</select>
+	<!--新闻回显-->
+	<select id="findByIdNew" resultType="com.jk.pojo.NewsBean">
+		select * from t_news where id = #{id}
+	</select>
+	<!--删除新闻-->
+	<delete id="delNew">
+		delete from t_news where id = #{id}
+	</delete>
+	<!--修改状态-->
+	<update id="nupSta">
+		update t_news set status = #{status} where id = #{id}
+	</update>
 </mapper>

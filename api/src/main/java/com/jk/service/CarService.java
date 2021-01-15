@@ -61,4 +61,14 @@ public interface CarService {
     void upSts(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
     @RequestMapping("new/findNew")
     HashMap<String, Object> findNew(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, NewsBean bean);
+    @RequestMapping("new/addNew")
+    void addNew(NewsBean bean);
+    @RequestMapping("new/findNty")
+    List<NewsBean> findNty();
+    @RequestMapping("new/findByIdNew")
+    NewsBean findByIdNew(@RequestParam("id")Integer id);
+    @RequestMapping("new/delNew")
+    void delNew(@RequestParam("id")Integer id);
+    @RequestMapping("new/nupSta")
+    void nupSta(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
 }

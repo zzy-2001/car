@@ -130,4 +130,29 @@ public class Hystrix implements CarService{
     public HashMap<String, Object> findNew(Integer page, Integer rows, NewsBean bean) {
         return null;
     }
+
+    @Override
+    public void addNew(NewsBean bean) {
+
+    }
+
+    @Override
+    public List<NewsBean> findNty() {
+        return null;
+    }
+
+    @Override
+    public NewsBean findByIdNew(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void delNew(Integer id) {
+
+    }
+
+    @Override
+    public void nupSta(Integer id, Integer status) {
+
+    }
 }

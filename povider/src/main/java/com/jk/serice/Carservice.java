@@ -56,4 +56,14 @@ public interface Carservice {
     void upSts(Integer id, Integer status);
 
     HashMap<String, Object> findNew(Integer page, Integer rows, NewsBean bean);
+
+    void addNew(NewsBean bean);
+
+    List<NewsBean> findNty();
+
+    NewsBean findByIdNew(Integer id);
+
+    void delNew(Integer id);
+
+    void nupSta(Integer id, Integer status);
 }
