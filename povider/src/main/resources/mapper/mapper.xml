@@ -216,4 +216,20 @@
 	<update id="nupSta">
 		update t_news set status = #{status} where id = #{id}
 	</update>
+	<!--新增类型-->
+	<insert id="addNty">
+		insert into t_ntype values(id,#{name})
+	</insert>
+	<!--修改类型-->
+	<update id="upNty">
+		update t_ntype set name = #{name} where id = #{id}
+	</update>
+	<!--类型回显-->
+	<select id="findByIdNty" resultType="com.jk.pojo.NewsBean">
+		select * from t_ntype where id = #{id}
+	</select>
+	<!--类型删除-->
+	<delete id="delNty">
+		delete from t_ntype where id = #{id}
+	</delete>
 </mapper>

@@ -88,4 +88,40 @@ public class NewsController {
     public void nupSta(Integer id,Integer status){
         service.nupSta(id,status);
     }
+
+    /**
+     * @Author: zzy
+     * @Description: 新增 修改 类型表
+     * @Date: 2021/1/15 19:06
+     * @Return: void
+     **/
+    @RequestMapping("addNty")
+    @ResponseBody
+    public void addNty(@RequestBody NewsBean bean){
+        service.addNty(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 回显类型
+     * @Date: 2021/1/15 19:12
+     * @Return: com.jk.pojo.NewsBean
+     **/
+    @RequestMapping("findByIdNty")
+    @ResponseBody
+    public NewsBean findByIdNty(Integer id){
+        return service.findByIdNty(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除类型
+     * @Date: 2021/1/15 19:12
+     * @Return: void
+     **/
+    @RequestMapping("delNty")
+    @ResponseBody
+    public void delNty(Integer id){
+        service.delNty(id);
+    }
 }

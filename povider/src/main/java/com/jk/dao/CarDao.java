@@ -94,4 +94,12 @@ public interface CarDao {
     void delNew(Integer id);
 
     void nupSta(Integer id, Integer status);
+
+    void addNty(NewsBean bean);
+
+    void upNty(NewsBean bean);
+
+    NewsBean findByIdNty(Integer id);
+
+    void delNty(Integer id);
 }

@@ -155,4 +155,19 @@ public class Hystrix implements CarService{
     public void nupSta(Integer id, Integer status) {
 
     }
+
+    @Override
+    public void addNty(NewsBean bean) {
+
+    }
+
+    @Override
+    public NewsBean findByIdNty(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void delNty(Integer id) {
+
+    }
 }

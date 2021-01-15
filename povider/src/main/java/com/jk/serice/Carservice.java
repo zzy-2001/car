@@ -66,4 +66,10 @@ public interface Carservice {
     void delNew(Integer id);
 
     void nupSta(Integer id, Integer status);
+
+    void addNty(NewsBean bean);
+
+    NewsBean findByIdNty(Integer id);
+
+    void delNty(Integer id);
 }

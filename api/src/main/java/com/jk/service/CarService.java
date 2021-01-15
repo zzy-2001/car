@@ -71,4 +71,10 @@ public interface CarService {
     void delNew(@RequestParam("id")Integer id);
     @RequestMapping("new/nupSta")
     void nupSta(@RequestParam("id")Integer id,@RequestParam("status") Integer status);
+    @RequestMapping("new/addNty")
+    void addNty(NewsBean bean);
+    @RequestMapping("new/findByIdNty")
+    NewsBean findByIdNty(@RequestParam("id")Integer id);
+    @RequestMapping("new/delNty")
+    void delNty(@RequestParam("id")Integer id);
 }

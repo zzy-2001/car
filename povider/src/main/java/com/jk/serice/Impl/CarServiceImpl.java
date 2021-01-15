@@ -253,6 +253,27 @@ public class CarServiceImpl implements Carservice {
         dao.nupSta(id,status);
     }
 
+    @Override
+    public void addNty(NewsBean bean) {
+        if (bean.getId()==null){
+            //新闻类型新增
+            dao.addNty(bean);
+        }else {
+            //新闻类型修改
+            dao.upNty(bean);
+        }
+    }
+
+    @Override
+    public NewsBean findByIdNty(Integer id) {
+        return dao.findByIdNty(id);
+    }
+
+    @Override
+    public void delNty(Integer id) {
+        dao.delNty(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {
