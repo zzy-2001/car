@@ -182,4 +182,9 @@ public class Hystrix implements CarService{
     public List<UserBean> findRol() {
         return null;
     }
+
+    @Override
+    public List<UserBean> findBra() {
+        return null;
+    }
 }

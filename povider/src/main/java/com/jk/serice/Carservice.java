@@ -75,4 +75,6 @@ public interface Carservice {
     void upOrd(String id, Integer status);
 
     List<UserBean> findRol();
+
+    List<UserBean> findBra();
 }

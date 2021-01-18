@@ -237,4 +237,8 @@
 	<select id="findRol" resultType="com.jk.pojo.UserBean">
 		select * from t_role
 	</select>
+	<!--部门查询-->
+	<select id="findBra" resultType="com.jk.pojo.UserBean">
+		select * from t_branch
+	</select>
 </mapper>

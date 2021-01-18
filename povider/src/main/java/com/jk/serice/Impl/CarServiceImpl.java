@@ -301,6 +301,11 @@ public class CarServiceImpl implements Carservice {
         return dao.findRol();
     }
 
+    @Override
+    public List<UserBean> findBra() {
+        return dao.findBra();
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

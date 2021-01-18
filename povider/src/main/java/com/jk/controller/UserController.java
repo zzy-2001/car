@@ -26,4 +26,15 @@ public class UserController {
     public List<UserBean> findRol(){
         return service.findRol();
     }
+    /*
+     * @Author: zzy
+     * @Description: 部门管理
+     * @Date: 2021/1/18 11:45
+     * @Return: java.util.List<com.jk.pojo.UserBean>
+     **/
+    @RequestMapping("findBra")
+    @ResponseBody
+    public List<UserBean> findBra(){
+        return service.findBra();
+    }
 }
