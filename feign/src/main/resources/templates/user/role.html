@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- 引入bootstap的css文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap-theme.css">
+
+<!-- 引入jquery文件 -->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+<!-- 引入bootstrap的js文件 -->
+<script type="text/javascript" src="../js/bootstrap/bootstrap3/js/bootstrap.min.js"></script>
+
+<!-- 引入表格的css和js文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-table/bootstrap-table.css">
+<script src="../js/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../js/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<!-- 引入弹框的js文件 -->
+<script src="../js/bootstrap/bootstrap-bootbox/bootbox.js"></script>
+
+<!-- 引入日期得css和js文件 -->
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+
+<!-- 引入上传文件的css和js文件 -->
+<script src="../js/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-fileinput/css/fileinput.css">
+</head>
+<body>
+	<table class="table" id="myTable"></table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		initUserTable();
+	})
+	//加载表格
+	function initUserTable(){
+		$('#myTable').bootstrapTable({
+			url:'../user/findRol',//获取数据地址
+			columns:[
+					[
+				  {field:"xx",checkbox:true},
+			      {field:"role_id",title:"序号"},
+			      {field:"role_name",title:"权限名称"},
+			      {field:"role_info",title:"权限描述"}
+			]
+			],
+		})
+	}
+</script>
+</html>

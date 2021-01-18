@@ -177,4 +177,9 @@ public class Hystrix implements CarService{
     public void upOrd(String id, Integer status) {
 
     }
+
+    @Override
+    public List<UserBean> findRol() {
+        return null;
+    }
 }

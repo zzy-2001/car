@@ -232,7 +232,9 @@
 	<delete id="delNty">
 		delete from t_ntype where id = #{id}
 	</delete>
-	<select id="addORd" resultType="com.jk.pojo.OrdBean">
-		select * from t_order
+	<!--用户管理-->
+	<!--角色查询-->
+	<select id="findRol" resultType="com.jk.pojo.UserBean">
+		select * from t_role
 	</select>
 </mapper>

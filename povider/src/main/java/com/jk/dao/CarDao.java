@@ -100,5 +100,5 @@ public interface CarDao {
 
     void delNty(Integer id);
 
-    List<OrdBean> addORd();
+    List<UserBean> findRol();
 }

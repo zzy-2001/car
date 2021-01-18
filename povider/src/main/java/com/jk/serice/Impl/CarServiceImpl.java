@@ -296,6 +296,11 @@ public class CarServiceImpl implements Carservice {
         mongoTemplate.save(bean);
     }
 
+    @Override
+    public List<UserBean> findRol() {
+        return dao.findRol();
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

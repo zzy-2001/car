@@ -78,4 +78,6 @@ public interface CarService {
     HashMap<String, Object> findOrd(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, OrdBean bean);
     @RequestMapping("ord/upOrd")
     void upOrd(@RequestParam("id")String id,@RequestParam("status") Integer status);
+    @RequestMapping("user/findRol")
+    List<UserBean> findRol();
 }

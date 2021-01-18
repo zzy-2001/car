@@ -73,4 +73,6 @@ public interface Carservice {
     HashMap<String, Object> findOrd(Integer page, Integer rows, OrdBean bean);
 
     void upOrd(String id, Integer status);
+
+    List<UserBean> findRol();
 }
