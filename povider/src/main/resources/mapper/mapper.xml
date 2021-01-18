@@ -253,4 +253,8 @@
 	<select id="findByIdBra" resultType="com.jk.pojo.UserBean">
 		select * from t_branch where id = #{id}
 	</select>
+	<!--部门删除-->
+	<delete id="delBra">
+		delete from t_branch where id = #{id}
+	</delete>
 </mapper>

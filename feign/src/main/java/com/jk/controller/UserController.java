@@ -61,7 +61,6 @@ public class UserController {
     public void addBra(UserBean bean){
         service.addBra(bean);
     }
-
     /**
      * @Author: zzy
      * @Description: 部门回显
@@ -72,6 +71,18 @@ public class UserController {
     @ResponseBody
     public UserBean findByIdBra(Integer id){
         return service.findByIdBra(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除部门
+     * @Date: 2021/1/18 16:18
+     * @Return: void
+     **/
+    @RequestMapping("delBra")
+    @ResponseBody
+    public void delBra(Integer id){
+        service.delBra(id);
     }
 
 }

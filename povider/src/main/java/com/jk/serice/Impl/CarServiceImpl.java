@@ -322,6 +322,11 @@ public class CarServiceImpl implements Carservice {
         return dao.findByIdBra(id);
     }
 
+    @Override
+    public void delBra(Integer id) {
+        dao.delBra(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

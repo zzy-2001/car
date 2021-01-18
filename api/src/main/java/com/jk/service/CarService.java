@@ -86,4 +86,6 @@ public interface CarService {
     void addBra(UserBean bean);
     @RequestMapping("user/findByIdBra")
     UserBean findByIdBra(@RequestParam("id")Integer id);
+    @RequestMapping("user/delBra")
+    void delBra(@RequestParam("id")Integer id);
 }

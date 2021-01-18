@@ -41,7 +41,7 @@
 		initUserTable();
 	})
 	//打开修改弹框：回显表单数据
-	function upPla(id){
+	function upBra(id){
 		bootbox.dialog({
 			title:'修改广告位置名称',
 		    message: createAddContent("../user/toAddBra"),//弹框内容
@@ -149,8 +149,8 @@
 			      {field:"phone",title:"负责人电话"},
 		          {field:"zz",title:"操作",formatter:function(value,row,index){
 		        	  str = "";
-					  str += "<input type='button' value='删除' onclick='delPla("+row.id+")'>";
-					  str += "<input type='button' value='修改' onclick='upPla("+row.id+")'>";
+					  str += "<input type='button' value='删除' onclick='delBra("+row.id+")'>";
+					  str += "<input type='button' value='修改' onclick='upBra("+row.id+")'>";
 		        	  return str;
 		          }}
 			]
@@ -166,21 +166,11 @@
 
 		})
 	}
-	function delPla(id) {
+	function delBra(id) {
     	$.ajax({
-			url:"../page/delPla",
+			url:"../user/delBra",
 			type:"post",
 			data:{id:id},
-			success:function(){
-				$('#myTable').bootstrapTable('refresh');
-			}
-		});
-	}
-	function upSta(id,status) {
-    	$.ajax({
-			url:"../page/upSts",
-			type:"post",
-			data:{id:id,status:status},
 			success:function(){
 				$('#myTable').bootstrapTable('refresh');
 			}

@@ -197,4 +197,9 @@ public class Hystrix implements CarService{
     public UserBean findByIdBra(Integer id) {
         return null;
     }
+
+    @Override
+    public void delBra(Integer id) {
+
+    }
 }

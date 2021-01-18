@@ -81,4 +81,6 @@ public interface Carservice {
     void addBra(UserBean bean);
 
     UserBean findByIdBra(Integer id);
+
+    void delBra(Integer id);
 }
