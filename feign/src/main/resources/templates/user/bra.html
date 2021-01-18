@@ -44,7 +44,7 @@
 	function upPla(id){
 		bootbox.dialog({
 			title:'修改广告位置名称',
-		    message: createAddContent("../page/toAddPla"),//弹框内容
+		    message: createAddContent("../user/toAddBra"),//弹框内容
 		    closeButton: true,//是否显示关闭按钮
 		    buttons : {
 		        "success" : {
@@ -53,9 +53,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../page/addPla',
+		            		url:'../user/addBra',
 		            		type:'post',
-		            		data:$("#plaForm").serialize(),//表单序列化
+		            		data:$("#braFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -75,12 +75,14 @@
 		    
 		});	
 		$.ajax({
-			url:"../page/findByIdPla",
+			url:"../user/findByIdBra",
 			type:"post",
 			data:{id:id},
 			success:function(data){
 				$("#id").val(data.id);
 				$("#name").val(data.name);
+				$("#principal").val(data.principal);
+				$("#phone").val(data.phone);
 			}
 		})
 	}
@@ -99,7 +101,7 @@
 	function openpage(){
 		bootbox.dialog({
 			title:'添加广告位置名称',
-		    message: createAddContent("../page/toAddPla"),//弹框内容
+		    message: createAddContent("../user/toAddBra"),//弹框内容
 		    closeButton: true,//是否显示关闭按钮
 		    buttons : {
 		        "success" : {
@@ -108,9 +110,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../page/addPla',//后台请求地址
+		            		url:'../user/addBra',//后台请求地址
 		            		type:'post',
-		            		data:$("#plaForm").serialize(),//表单序列化
+		            		data:$("#braFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格

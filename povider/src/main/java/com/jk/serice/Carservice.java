@@ -77,4 +77,8 @@ public interface Carservice {
     List<UserBean> findRol();
 
     List<UserBean> findBra();
+
+    void addBra(UserBean bean);
+
+    UserBean findByIdBra(Integer id);
 }

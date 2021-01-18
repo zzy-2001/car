@@ -103,4 +103,10 @@ public interface CarDao {
     List<UserBean> findRol();
 
     List<UserBean> findBra();
+
+    void addBra(UserBean bean);
+
+    void upBra(UserBean bean);
+
+    UserBean findByIdBra(Integer id);
 }

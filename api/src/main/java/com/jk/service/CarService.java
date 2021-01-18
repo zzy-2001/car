@@ -82,4 +82,8 @@ public interface CarService {
     List<UserBean> findRol();
     @RequestMapping("user/findBra")
     List<UserBean> findBra();
+    @RequestMapping("user/addBra")
+    void addBra(UserBean bean);
+    @RequestMapping("user/findByIdBra")
+    UserBean findByIdBra(@RequestParam("id")Integer id);
 }

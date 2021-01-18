@@ -187,4 +187,14 @@ public class Hystrix implements CarService{
     public List<UserBean> findBra() {
         return null;
     }
+
+    @Override
+    public void addBra(UserBean bean) {
+
+    }
+
+    @Override
+    public UserBean findByIdBra(Integer id) {
+        return null;
+    }
 }

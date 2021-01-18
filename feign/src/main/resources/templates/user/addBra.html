@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container-fluid">
+		<form id="braFrom">
+		<input type="hidden" id="id" name="id">
+			<div class="form-group">
+				<div class="row">		
+					<div class="col-md-2">
+						 <label for="name">部门名称:</label>
+					</div>
+					<div class="col-md-4">
+						<input type="text" id="name" name="name" class="form-control" placeholder="请输入部门名称">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						 <label for="principal">负责人:</label>
+					</div>
+					<div class="col-md-4">
+						<input type="text" id="principal" name="principal" class="form-control" placeholder="请输入负责人">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						 <label for="phone">负责人电话:</label>
+					</div>
+					<div class="col-md-4">
+						<input type="text" id="phone" name="phone" class="form-control" placeholder="请输入负责人电话">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+	$('.date').datetimepicker({
+		  language: 'zh-CN',//显示中文
+		  //format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+		  format: 'yyyy-mm-dd',//显示格式
+		  minView: "month",//设置只显示到月份
+		  initialDate: new Date(),//初始化当前日期
+		  autoclose: true,//选中自动关闭
+		  todayBtn: true//显示今日按钮
+	});
+</script>
+</html>

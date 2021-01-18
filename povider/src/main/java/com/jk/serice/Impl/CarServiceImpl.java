@@ -306,6 +306,22 @@ public class CarServiceImpl implements Carservice {
         return dao.findBra();
     }
 
+    @Override
+    public void addBra(UserBean bean) {
+        if (bean.getId()==null){
+            //部门新增
+            dao.addBra(bean);
+        }else {
+            //部门修改
+            dao.upBra(bean);
+        }
+    }
+
+    @Override
+    public UserBean findByIdBra(Integer id) {
+        return dao.findByIdBra(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

@@ -241,4 +241,16 @@
 	<select id="findBra" resultType="com.jk.pojo.UserBean">
 		select * from t_branch
 	</select>
+	<!--部门新增-->
+	<insert id="addBra">
+		insert into t_branch values(id,#{name},#{principal},#{phone})
+	</insert>
+	<!--部门修改-->
+	<update id="upBra">
+		update set name = #{name},principal = #{principal},phone = #{phone} where id = #{id}
+	</update>
+	<!--部门回显-->
+	<select id="findByIdBra" resultType="com.jk.pojo.UserBean">
+		select * from t_branch where id = #{id}
+	</select>
 </mapper>
