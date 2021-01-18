@@ -232,4 +232,7 @@
 	<delete id="delNty">
 		delete from t_ntype where id = #{id}
 	</delete>
+	<select id="addORd" resultType="com.jk.pojo.OrdBean">
+		select * from t_order
+	</select>
 </mapper>

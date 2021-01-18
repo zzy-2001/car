@@ -1,12 +1,11 @@
 package com.jk.serice.Impl;
 
 import com.jk.dao.CarDao;
-import com.jk.pojo.CarBean;
-import com.jk.pojo.NewsBean;
-import com.jk.pojo.SloBean;
-import com.jk.pojo.TreeBean;
+import com.jk.pojo.*;
 import com.jk.serice.Carservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -272,6 +271,29 @@ public class CarServiceImpl implements Carservice {
     @Override
     public void delNty(Integer id) {
         dao.delNty(id);
+    }
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    @Override
+    public HashMap<String, Object> findOrd(Integer page, Integer rows, OrdBean bean) {
+        Query query = new Query();
+        long total = mongoTemplate.count(query, OrdBean.class);
+        int start = (page-1)*rows;
+        query.skip(start).limit(rows);
+        List<OrdBean> list = mongoTemplate.find(query, OrdBean.class);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("rows",list);
+        return map;
+    }
+
+    @Override
+    public void upOrd(String id, Integer sttus) {
+        OrdBean bean = mongoTemplate.findById(id, OrdBean.class);
+        bean.setOrderst(sttus);
+        mongoTemplate.save(bean);
     }
 
     private List<TreeBean> findtree(int pid,int userid) {

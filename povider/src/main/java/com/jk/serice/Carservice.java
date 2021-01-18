@@ -1,9 +1,6 @@
 package com.jk.serice;
 
-import com.jk.pojo.CarBean;
-import com.jk.pojo.NewsBean;
-import com.jk.pojo.SloBean;
-import com.jk.pojo.TreeBean;
+import com.jk.pojo.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -72,4 +69,8 @@ public interface Carservice {
     NewsBean findByIdNty(Integer id);
 
     void delNty(Integer id);
+
+    HashMap<String, Object> findOrd(Integer page, Integer rows, OrdBean bean);
+
+    void upOrd(String id, Integer status);
 }

@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.pojo.CarBean;
-import com.jk.pojo.NewsBean;
-import com.jk.pojo.SloBean;
-import com.jk.pojo.TreeBean;
+import com.jk.pojo.*;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -168,6 +165,16 @@ public class Hystrix implements CarService{
 
     @Override
     public void delNty(Integer id) {
+
+    }
+
+    @Override
+    public HashMap<String, Object> findOrd(Integer page, Integer rows, OrdBean bean) {
+        return null;
+    }
+
+    @Override
+    public void upOrd(String id, Integer status) {
 
     }
 }

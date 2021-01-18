@@ -1,0 +1,192 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- 引入bootstap的css文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap.css">
+<link rel="stylesheet" href="../js/bootstrap/bootstrap3/css/bootstrap-theme.css">
+
+<!-- 引入jquery文件 -->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+<!-- 引入bootstrap的js文件 -->
+<script type="text/javascript" src="../js/bootstrap/bootstrap3/js/bootstrap.min.js"></script>
+
+<!-- 引入表格的css和js文件 -->
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-table/bootstrap-table.css">
+<script src="../js/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+<script src="../js/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<!-- 引入弹框的js文件 -->
+<script src="../js/bootstrap/bootstrap-bootbox/bootbox.js"></script>
+
+<!-- 引入日期得css和js文件 -->
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../js/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+
+<!-- 引入上传文件的css和js文件 -->
+<script src="../js/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+<script src="../js/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+<link rel="stylesheet" href="../js/bootstrap/bootstrap-fileinput/css/fileinput.css">
+</head>
+<body>
+	<div id="toolbar">
+		<form class="form-inline">
+		  <div class="form-group">
+		  	<label for="name1">广告名称：</label>
+		    <input type="text" class="form-control" id="name1" placeholder="请输入广告名称">
+		  </div>
+		  <button type="button" onclick="searord()" class="btn btn-success glyphicon glyphicon-search">搜索</button>		
+		  <button type="button" onclick="openord()" class="btn btn-warning glyphicon glyphicon-plus">新增</button>
+		</form>
+	</div>
+	<table class="table" id="myTable"></table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		initUserTable();
+	})
+	//打开修改弹框：回显表单数据
+	function upSlo(id){
+		bootbox.dialog({
+			title:'修改广告',
+		    message: createAddContent("../ord/toAdd"),//弹框内容
+		    closeButton: true,//是否显示关闭按钮
+		    buttons : {
+		        "success" : {
+		            "label" : "<i class='icon-ok'></i> 保存",
+		            "className" : "btn-sm btn-success",
+		            "callback" : function() {
+		            	//提交表单数据：保存
+		            	$.ajax({
+		            		url:'../ord/addord',
+		            		type:'post',
+		            		data:$("#ordFrom").serialize(),//表单序列化
+		            		//dataType:'json',
+		            		success:function(){
+		            			//刷新表格
+		            		searord();
+		            		}
+		            	});
+			        }
+		        },
+		        "cancel" : {
+		            "label" : "<i class='icon-info'></i> 取消",
+		            "className" : "btn-sm btn-danger",
+		            "callback" : function() {
+
+		            }
+		        }
+		    }
+
+		});
+		$.ajax({
+			url:"../ord/findByIdord",
+			type:"post",
+			data:{id:id},
+			success:function(data){
+				initPla();//类型表
+				$("#id").val(data.id);
+				$("#title").val(data.title);
+				$("#typeid").val(data.typeid);
+				$("#stdate").val(data.stdate);
+				$("#view").val(data.view);
+				//图片
+				uploadFile(data.view);
+			}
+		})
+	}
+	//初始化广告位置的数据
+	function initPla(){
+		$.ajax({
+			url:'../ord/findNty',//后台请求地址
+			type:'get',
+			async:false,
+			success:function(data){
+				//拼接下拉列表的字符串
+				var str = "<option value='-1'>请选择</option>";
+				for(var i=0;i<data.length;i++){
+					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
+				}
+				$("#typeid").html(str);
+			}
+		});
+	}
+
+	var res;
+	function createAddContent(url){
+		$.ajax({
+			url:url,
+			async:false,//同步，默认是：异步
+			success:function(data){
+				res = data;
+			}
+		});
+		return res;
+	}
+	//条查
+	function searord(){
+		$('#myTable').bootstrapTable('refresh');//刷新表格
+	}
+	//加载表格
+	function initUserTable(){
+		$('#myTable').bootstrapTable({
+			url:'../ord/findOrd',//获取数据地址
+			columns:[
+					[
+				  {field:"xx",checkbox:true},
+			      {field:"id",title:"序号"},
+			      {field:"code",title:"订单号"},
+			      {field:"price",title:"价格"},
+			      {field:"time",title:"下单时间"},
+			      {field:"status",title:"支付状态",formatter:function(value,row,index){
+					  return value==1?"已付款":"付款失败";
+		          }},
+			      {field:"orderst",title:"订单状态",formatter:function(value,row,index){
+					  return value==1?"货款已收到":value==2?"放送中":"等待确认";
+		          }},
+		          {field:"zz",title:"操作",formatter:function(value,row,index){
+		        	  str = "";
+		        	  if (row.orderst==3){
+						  str += "<input type='button' value='发货' onclick='upOrd("+row.id+",2)'>";
+					  }
+		        	  return str;
+		          }}
+			]
+			],
+			toolbar:'#toolbar',
+			pagination:true, //是否展示分页
+			newList:[5, 10, 20, 50],//分页组件
+			newNumber:1,
+			newSize:5,//默认每页条数
+			//search:true,//是否显示搜索框
+			//searchText:'试试',//初始化搜索文字
+			showColumns:false,//是否显示 内容列下拉框
+			showToggle:false,//是否显示 切换试图（table/card）按钮
+			showPaginationSwitch:false,//是否显示 数据条数选择框
+			showRefresh:false,//是否显示刷新按钮
+			detailView:false,//设置为 true 可以显示详细页面模式。
+			showFooter:false,//是否显示列脚clickToSelect: true, //是否启用点击选中行
+			sidePagination:'server',//分页方式：client客户端分页，server服务端分页
+			striped:true,
+			queryParams:function(){
+				return {
+					page: this.newNumber,
+					rows: this.newSize,
+				};
+			},
+		})
+	}
+	function upOrd(id,status) {
+		$.ajax({
+			url:"../ord/upOrd",
+			type:"post",
+			data:{id:id,status:status},
+			success:function(){
+				$('#myTable').bootstrapTable('refresh');
+			}
+		});
+	}
+</script>
+</html>

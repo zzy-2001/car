@@ -19,7 +19,7 @@ spring:
       post: 6379
       password:
     mongodb:
-      uri: mongodb://localhost:27017/zzy
+      uri: mongodb://localhost:27017/2006
     #配置elasticSearch信息
     elasticsearch:
       #连接的集群名称

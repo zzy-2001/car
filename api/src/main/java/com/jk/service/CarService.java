@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.pojo.CarBean;
-import com.jk.pojo.NewsBean;
-import com.jk.pojo.SloBean;
-import com.jk.pojo.TreeBean;
+import com.jk.pojo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,4 +74,8 @@ public interface CarService {
     NewsBean findByIdNty(@RequestParam("id")Integer id);
     @RequestMapping("new/delNty")
     void delNty(@RequestParam("id")Integer id);
+    @RequestMapping("ord/findOrd")
+    HashMap<String, Object> findOrd(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, OrdBean bean);
+    @RequestMapping("ord/upOrd")
+    void upOrd(@RequestParam("id")String id,@RequestParam("status") Integer status);
 }

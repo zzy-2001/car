@@ -1,9 +1,6 @@
 package com.jk.dao;
 
-import com.jk.pojo.CarBean;
-import com.jk.pojo.NewsBean;
-import com.jk.pojo.SloBean;
-import com.jk.pojo.TreeBean;
+import com.jk.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -102,4 +99,6 @@ public interface CarDao {
     NewsBean findByIdNty(Integer id);
 
     void delNty(Integer id);
+
+    List<OrdBean> addORd();
 }
