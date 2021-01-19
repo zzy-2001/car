@@ -202,4 +202,9 @@ public class Hystrix implements CarService{
     public void delBra(Integer id) {
 
     }
+
+    @Override
+    public HashMap<String, Object> findUse(Integer page, Integer rows, UserBean bean) {
+        return null;
+    }
 }

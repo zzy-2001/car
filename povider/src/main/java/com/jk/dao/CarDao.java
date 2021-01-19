@@ -111,4 +111,8 @@ public interface CarDao {
     UserBean findByIdBra(Integer id);
 
     void delBra(Integer id);
+
+    int useTotal(@Param("bean")UserBean bean);
+
+    List<UserBean> usePage(@Param("start") int start, @Param("rows") Integer rows,@Param("bean") UserBean bean);
 }

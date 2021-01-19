@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -73,5 +74,17 @@ public class UserController {
     @ResponseBody
     public void delBra(Integer id){
         service.delBra(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 用户查询
+     * @Date: 2021/1/18 19:02
+     * @Return: java.util.HashMap<java.lang.String, java.lang.Object>
+     **/
+    @RequestMapping("findUse")
+    @ResponseBody
+    public HashMap<String,Object> findUse(Integer page, Integer rows, UserBean bean){
+        return service.findUse(page,rows,bean);
     }
 }

@@ -257,4 +257,24 @@
 	<delete id="delBra">
 		delete from t_branch where id = #{id}
 	</delete>
+	<!--总条数-->
+	<select id="useTotal" resultType="int">
+		select u.*,b.name name1 from t_user u
+		left join t_branch b on b.id = u.branchid
+		<include refid="sql3"/>
+	</select>
+	<!--分页查询-->
+	<select id="usePage" resultType="com.jk.pojo.UserBean">
+		select u.*,b.name name1 from t_user u
+		left join t_branch b on b.id = u.branchid
+		<include refid="sql3"/>
+		limit #{start},#{rows}
+	</select>
+	<sql id="sql3">
+		<where>
+			<if test="bean.name!=null and bean.name!=''">
+				and u.name like "%${bean.name}%"
+			</if>
+		</where>
+	</sql>
 </mapper>

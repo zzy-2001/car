@@ -172,28 +172,17 @@
 	//加载表格
 	function initUserTable(){
 		$('#myTable').bootstrapTable({
-			url:'../new/findNew',//获取数据地址
+			url:'../user/findUse',//获取数据地址
 			columns:[
 					[
 				  {field:"xx",checkbox:true},
 			      {field:"id",title:"序号"},
-			      {field:"title",title:"新闻标题"},
-			      {field:"typeid",title:"类型"},
-			      {field:"view",title:"图片",formatter:function(value,row,index){
-		        	  str = "<img width='50px' height='50px' src='"+value+"'>";
-		        	  return str;
-		          }},
-			      {field:"stdate",title:"开始时间"},
-			      {field:"status",title:"状态",formatter:function(value,row,index){
-					  return value==1?"启用":"禁用";
-		          }},
+			      {field:"name",title:"登录帐号"},
+			      {field:"phone",title:"电话"},
+			      {field:"linkman",title:"联系人"},
+			      {field:"name1",title:"所在部门"},
 		          {field:"zz",title:"操作",formatter:function(value,row,index){
 		        	  str = "";
-					  if (row.status==1){
-					  	str += "<input type='button' value='禁用' onclick='nupSta("+row.id+",2)'>";
-					  }else {
-					  	str += "<input type='button' value='启用' onclick='nupSta("+row.id+",1)'>";
-					  }
 					  str += "<input type='button' value='删除' onclick='delNew("+row.id+")'>";
 					  str += "<input type='button' value='编辑' onclick='upSlo("+row.id+")'>";
 		        	  return str;

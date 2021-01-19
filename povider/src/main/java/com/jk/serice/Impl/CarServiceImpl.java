@@ -327,6 +327,17 @@ public class CarServiceImpl implements Carservice {
         dao.delBra(id);
     }
 
+    @Override
+    public HashMap<String, Object> findUse(Integer page, Integer rows, UserBean bean) {
+        int total = dao.useTotal(bean);
+        int start = (page-1)*rows;
+        List<UserBean> list = dao.usePage(start,rows,bean);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total",total);
+        map.put("rows",list);
+        return map;
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

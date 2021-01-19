@@ -88,4 +88,6 @@ public interface CarService {
     UserBean findByIdBra(@RequestParam("id")Integer id);
     @RequestMapping("user/delBra")
     void delBra(@RequestParam("id")Integer id);
+    @RequestMapping("user/findUse")
+    HashMap<String, Object> findUse(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, UserBean bean);
 }
