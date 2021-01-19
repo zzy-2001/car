@@ -217,4 +217,14 @@ public class Hystrix implements CarService{
     public void addUse(UserBean bean) {
 
     }
+
+    @Override
+    public void upAut(Integer id, Integer role) {
+
+    }
+
+    @Override
+    public void delUse(Integer id) {
+
+    }
 }

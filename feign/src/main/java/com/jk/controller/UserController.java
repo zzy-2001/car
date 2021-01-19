@@ -59,6 +59,11 @@ public class UserController {
         return "user/addUse";
     }
 
+    @RequestMapping("toAut")
+    public String toAut(){
+        return "user/toAut";
+    }
+
     /**
      * @Author: zzy
      * @Description: 部门新增
@@ -103,7 +108,6 @@ public class UserController {
     public HashMap<String,Object> findUse(Integer page, Integer rows, UserBean bean){
         return service.findUse(page,rows,bean);
     }
-
     /**
      * @Author: zzy
      * @Description: 账号回显
@@ -126,5 +130,29 @@ public class UserController {
     @ResponseBody
     public void addUse(UserBean bean){
         service.addUse(bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 修改权限
+     * @Date: 2021/1/19 14:03
+     * @Return: void
+     **/
+    @RequestMapping("upAut")
+    @ResponseBody
+    public void upAut(Integer id,Integer role){
+        service.upAut(id,role);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除用户
+     * @Date: 2021/1/19 14:10
+     * @Return: void
+     **/
+    @RequestMapping("delUse")
+    @ResponseBody
+    public void delUse(Integer id){
+        service.delUse(id);
     }
 }

@@ -354,6 +354,16 @@ public class CarServiceImpl implements Carservice {
         }
     }
 
+    @Override
+    public void upAut(Integer id, Integer role) {
+        dao.upAut(id,role);
+    }
+
+    @Override
+    public void delUse(Integer id) {
+        dao.delUse(id);
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

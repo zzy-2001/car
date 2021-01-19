@@ -283,10 +283,18 @@
 	</select>
 	<!--账号新增-->
 	<insert id="addUse">
-		insert into t_user values(id,#{name},123456,#{linkman},#{phone},#{branchid},0);
+		insert into t_user values(id,#{name},123456,#{linkman},#{phone},#{branchid},3);
 	</insert>
 	<!--账号修改-->
 	<update id="upUse">
 		update t_user set pwd = #{pwd},linkman = #{linkman},phone = #{phone},branchid = #{branchid} where id = #{id}
 	</update>
+	<!--修改权限-->
+	<update id="upAut">
+		update t_user set role_id = #{role} where id = #{id}
+	</update>
+	<!--用户删除-->
+	<delete id="delUse">
+		delete from t_user where id = #{id}
+	</delete>
 </mapper>

@@ -89,4 +89,8 @@ public interface Carservice {
     UserBean findByIdUse(Integer id);
 
     void addUse(UserBean bean);
+
+    void upAut(Integer id, Integer role);
+
+    void delUse(Integer id);
 }

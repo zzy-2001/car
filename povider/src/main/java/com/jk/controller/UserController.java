@@ -111,4 +111,28 @@ public class UserController {
     public void addUse(@RequestBody UserBean bean){
         service.addUse(bean);
     }
+
+    /**
+     * @Author: zzy
+     * @Description: 修改权限
+     * @Date: 2021/1/19 14:03
+     * @Return: void
+     **/
+    @RequestMapping("upAut")
+    @ResponseBody
+    public void upAut(Integer id,Integer role){
+        service.upAut(id,role);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 删除用户
+     * @Date: 2021/1/19 14:10
+     * @Return: void
+     **/
+    @RequestMapping("delUse")
+    @ResponseBody
+    public void delUse(Integer id){
+        service.delUse(id);
+    }
 }

@@ -121,4 +121,8 @@ public interface CarDao {
     void addUse(UserBean bean);
 
     void upUse(UserBean bean);
+
+    void upAut(Integer id, Integer role);
+
+    void delUse(Integer id);
 }

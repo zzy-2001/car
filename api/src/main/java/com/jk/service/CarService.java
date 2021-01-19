@@ -94,4 +94,8 @@ public interface CarService {
     UserBean findByIdUse(@RequestParam("id")Integer id);
     @RequestMapping("user/addUse")
     void addUse(UserBean bean);
+    @RequestMapping("user/upAut")
+    void upAut(@RequestParam("id")Integer id,@RequestParam("role") Integer role);
+    @RequestMapping("user/delUse")
+    void delUse(@RequestParam("id")Integer id);
 }
