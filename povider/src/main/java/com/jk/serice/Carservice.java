@@ -85,4 +85,8 @@ public interface Carservice {
     void delBra(Integer id);
 
     HashMap<String, Object> findUse(Integer page, Integer rows, UserBean bean);
+
+    UserBean findByIdUse(Integer id);
+
+    void addUse(UserBean bean);
 }

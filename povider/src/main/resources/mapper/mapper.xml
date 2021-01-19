@@ -259,7 +259,7 @@
 	</delete>
 	<!--总条数-->
 	<select id="useTotal" resultType="int">
-		select u.*,b.name name1 from t_user u
+		select count(1) from t_user u
 		left join t_branch b on b.id = u.branchid
 		<include refid="sql3"/>
 	</select>
@@ -277,4 +277,16 @@
 			</if>
 		</where>
 	</sql>
+	<!--账号回显-->
+	<select id="findByIdUse" resultType="com.jk.pojo.UserBean">
+		select * from t_user where id = #{id};
+	</select>
+	<!--账号新增-->
+	<insert id="addUse">
+		insert into t_user values(id,#{name},123456,#{linkman},#{phone},#{branchid},0);
+	</insert>
+	<!--账号修改-->
+	<update id="upUse">
+		update t_user set pwd = #{pwd},linkman = #{linkman},phone = #{phone},branchid = #{branchid} where id = #{id}
+	</update>
 </mapper>

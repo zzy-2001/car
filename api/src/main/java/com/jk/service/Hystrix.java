@@ -207,4 +207,14 @@ public class Hystrix implements CarService{
     public HashMap<String, Object> findUse(Integer page, Integer rows, UserBean bean) {
         return null;
     }
+
+    @Override
+    public UserBean findByIdUse(Integer id) {
+        return null;
+    }
+
+    @Override
+    public void addUse(UserBean bean) {
+
+    }
 }

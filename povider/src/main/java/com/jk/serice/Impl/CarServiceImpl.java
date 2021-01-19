@@ -338,6 +338,22 @@ public class CarServiceImpl implements Carservice {
         return map;
     }
 
+    @Override
+    public UserBean findByIdUse(Integer id) {
+        return dao.findByIdUse(id);
+    }
+
+    @Override
+    public void addUse(UserBean bean) {
+        if (bean.getId()==null){
+            //账号新增
+            dao.addUse(bean);
+        }else {
+            //账号修改
+            dao.upUse(bean);
+        }
+    }
+
     private List<TreeBean> findtree(int pid,int userid) {
         List<TreeBean> list = dao.findnode(pid,userid);
         for (TreeBean tree : list) {

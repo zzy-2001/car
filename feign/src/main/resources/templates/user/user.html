@@ -34,8 +34,8 @@
 	<div id="toolbar">
 		<form class="form-inline">
 		  <div class="form-group">
-		  	<label for="name1">广告名称：</label>
-		    <input type="text" class="form-control" id="name1" placeholder="请输入广告名称">
+		  	<label for="name1">登录帐号：</label>
+		    <input type="text" class="form-control" id="name1" placeholder="请输入登录帐号">
 		  </div>
 		  <button type="button" onclick="searnew()" class="btn btn-success glyphicon glyphicon-search">搜索</button>		
 		  <button type="button" onclick="opennew()" class="btn btn-warning glyphicon glyphicon-plus">新增</button>
@@ -50,8 +50,8 @@
 	//打开修改弹框：回显表单数据
 	function upSlo(id){
 		bootbox.dialog({
-			title:'修改广告',
-		    message: createAddContent("../new/toAdd"),//弹框内容
+			title:'修改账号',
+		    message: createAddContent("../user/toAdd"),//弹框内容
 		    closeButton: true,//是否显示关闭按钮
 		    buttons : {
 		        "success" : {
@@ -60,9 +60,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../new/addNew',
+		            		url:'../user/addUse',
 		            		type:'post',
-		            		data:$("#newFrom").serialize(),//表单序列化
+		            		data:$("#useFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -82,25 +82,24 @@
 		    
 		});	
 		$.ajax({
-			url:"../new/findByIdNew",
+			url:"../user/findByIdUse",
 			type:"post",
 			data:{id:id},
 			success:function(data){
-				initPla();//类型表
+				initPla();//部门表
 				$("#id").val(data.id);
-				$("#title").val(data.title);
-				$("#typeid").val(data.typeid);
-				$("#stdate").val(data.stdate);
-				$("#view").val(data.view);
-				//图片
-				uploadFile(data.view);
+				$("#name").val(data.name);
+				$("#pwd").val(data.pwd);
+				$("#linkman").val(data.linkman);
+				$("#phone").val(data.phone);
+				$("#branchid").val(data.branchid);
 			}
 		})
 	}
-	//初始化广告位置的数据
+	//初始化部门表的数据
 	function initPla(){
 		$.ajax({
-			url:'../new/findNty',//后台请求地址
+			url:'../user/findBra',//后台请求地址
 			type:'get',
 			async:false,
 			success:function(data){
@@ -109,7 +108,9 @@
 				for(var i=0;i<data.length;i++){
 					str += "<option value='"+data[i].id+"'>"+data[i].name+"</option>";
 				}
-				$("#typeid").html(str);
+				$("#branchid").html(str);
+				var aaa = ("0000000" + 100000000 * Math.random()).match(/(\d{8})(\.|$)/)[1]
+				$("#name").val(aaa);
 			}
 		});	
 	}
@@ -128,8 +129,8 @@
 	//打开新增弹框
 	function opennew(){
 		bootbox.dialog({
-			title:'添加广告',
-		    message: createAddContent("../new/toAdd"),//弹框内容
+			title:'添加账号',
+		    message: createAddContent("../user/toAdd"),//弹框内容
 		    closeButton: true,//是否显示关闭按钮
 		    buttons : {
 		        "success" : {
@@ -138,9 +139,9 @@
 		            "callback" : function() {
 		            	//提交表单数据：保存
 		            	$.ajax({
-		            		url:'../new/addNew',//后台请求地址
+		            		url:'../user/addUse',//后台请求地址
 		            		type:'post',
-		            		data:$("#newFrom").serialize(),//表单序列化
+		            		data:$("#useFrom").serialize(),//表单序列化
 		            		//dataType:'json',
 		            		success:function(){
 		            			//刷新表格
@@ -158,12 +159,9 @@
 		        }
 		    }
 		    
-		});	
-		
-		//初始化省的数据
+		});
+		//初始部门的数据
 		initPla();
-		//加载上传图片
-		uploadFile();
 	}
 	//条查
 	function searnew(){
@@ -233,38 +231,6 @@
 				$('#myTable').bootstrapTable('refresh');
 			}
 		});
-	}
-	//上传图片
-	function uploadFile(url){
-		$('#userImg').fileinput({
-			initialPreview:url,
-			//初始化图片配置：
-			initialPreviewConfig: [
-			    {key: 1, showDelete: false}
-			],
-			//是否初始化图片显示
-			initialPreviewAsData: true,
-			language: 'zh', //设置语言
-			uploadUrl: '<%=request.getContextPath()%>/new/uploadUserImg', //上传的地址
-			allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
-			showUpload: true, //是否显示上传按钮
-			showCaption: false,//是否显示标题
-			browseClass: "btn btn-primary", //按钮样式 
-			maxFileCount: 2, //表示允许同时上传的最大文件个数
-			enctype: 'multipart/form-data',
-			validateInitialCount:true,
-			previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-			msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-			
-		}).on('fileuploaded', function(event, data, previewId, index) {
-			//var imgval = $('#testimg').val();
-			//if(imgval == null || imgval == "" || imgval == undefined){
-			var	imgval = "http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/upload/"+data.response;
-			//}else{
-			//	imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
-			//}
-			$('#testimg').val(imgval);
-		});	
 	}
 </script>
 </html>

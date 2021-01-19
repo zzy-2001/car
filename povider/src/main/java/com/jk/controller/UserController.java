@@ -84,7 +84,31 @@ public class UserController {
      **/
     @RequestMapping("findUse")
     @ResponseBody
-    public HashMap<String,Object> findUse(Integer page, Integer rows, UserBean bean){
+    public HashMap<String,Object> findUse(Integer page, Integer rows,@RequestBody UserBean bean){
         return service.findUse(page,rows,bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 账号回显
+     * @Date: 2021/1/19 10:48
+     * @Return: com.jk.pojo.UserBean
+     **/
+    @RequestMapping("findByIdUse")
+    @ResponseBody
+    public UserBean findByIdUse(Integer id){
+        return service.findByIdUse(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 账号新增 修改
+     * @Date: 2021/1/19 10:52
+     * @Return: void
+     **/
+    @RequestMapping("addUse")
+    @ResponseBody
+    public void addUse(@RequestBody UserBean bean){
+        service.addUse(bean);
     }
 }

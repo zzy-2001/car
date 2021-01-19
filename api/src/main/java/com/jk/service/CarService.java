@@ -90,4 +90,8 @@ public interface CarService {
     void delBra(@RequestParam("id")Integer id);
     @RequestMapping("user/findUse")
     HashMap<String, Object> findUse(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows, UserBean bean);
+    @RequestMapping("user/findByIdUse")
+    UserBean findByIdUse(@RequestParam("id")Integer id);
+    @RequestMapping("user/addUse")
+    void addUse(UserBean bean);
 }

@@ -54,6 +54,10 @@ public class UserController {
     public String toAddBra(){
         return "user/addBra";
     }
+    @RequestMapping("toAdd")
+    public String toAdd(){
+        return "user/addUse";
+    }
 
     /**
      * @Author: zzy
@@ -77,7 +81,6 @@ public class UserController {
     public UserBean findByIdBra(Integer id){
         return service.findByIdBra(id);
     }
-
     /**
      * @Author: zzy
      * @Description: 删除部门
@@ -89,7 +92,6 @@ public class UserController {
     public void delBra(Integer id){
         service.delBra(id);
     }
-    
     /**
      * @Author: zzy
      * @Description: 用户查询
@@ -100,5 +102,29 @@ public class UserController {
     @ResponseBody
     public HashMap<String,Object> findUse(Integer page, Integer rows, UserBean bean){
         return service.findUse(page,rows,bean);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 账号回显
+     * @Date: 2021/1/19 10:48
+     * @Return: com.jk.pojo.UserBean
+     **/
+    @RequestMapping("findByIdUse")
+    @ResponseBody
+    public UserBean findByIdUse(Integer id){
+        return service.findByIdUse(id);
+    }
+
+    /**
+     * @Author: zzy
+     * @Description: 账号新增 修改
+     * @Date: 2021/1/19 10:52
+     * @Return: void
+     **/
+    @RequestMapping("addUse")
+    @ResponseBody
+    public void addUse(UserBean bean){
+        service.addUse(bean);
     }
 }
